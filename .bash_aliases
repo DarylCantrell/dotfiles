@@ -1,8 +1,8 @@
 ### Basic unix commands
 
-alias ls='false'
-alias l='ls -GAhvF --color=auto --group-directories-first --file-type'
-alias ll='ls -l -GAhvF --color=auto --group-directories-first --file-type'
+alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
+alias l='ls'
+alias ll='ls -l'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
