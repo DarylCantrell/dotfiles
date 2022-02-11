@@ -1,5 +1,7 @@
 ### Basic unix commands
 
+alias j='jobs'
+
 alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
 alias l='ls'
 alias ll='ls -l'
@@ -8,6 +10,17 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+alias up='cd ..'
+alias up1='cd ..'
+alias up2='cd ../..'
+alias up3='cd ../../..'
+alias up4='cd ../../../..'
+alias up5='cd ../../../../..'
+alias up6='cd ../../../../../..'
+
+alias pd='pushd'
+alias pp='popd'
+
 ### Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -15,6 +28,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 ### Git commands
 
 alias stat='git status'
+
+alias unstage='git restore --staged'
 
 alias diff='git diff -w'
 alias diff0='git diff -w -U0'
