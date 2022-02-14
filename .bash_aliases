@@ -18,6 +18,7 @@ alias up4='cd ../../../..'
 alias up5='cd ../../../../..'
 alias up6='cd ../../../../../..'
 
+alias d='dirs'
 alias pd='pushd'
 alias pp='popd'
 

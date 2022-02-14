@@ -21,29 +21,41 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-else
-    color_prompt=
-fi
+__bash_prompt() {
+    local color_prompt=
+    case "$TERM" in
+        xterm-color|*-256color)
+            color_prompt=yes;;
+        *)
+            if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+                color_prompt=yes
+            fi;;
+    esac
 
-if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='\u@\h:\w\$ '
-fi
-unset color_prompt
+    if [ -n "$color_prompt" ]; then
+        local user_and_xit_part='`export XIT=$? \
+            && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
+            && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+        local lightblue=`echo -n '\[\033[1;34m\]'`
+        local removecolor=`echo -n '\[\033[0m\]'`
+    else
+        local user_and_xit_part='`export XIT=$? \
+            && [ ! -z "${GITHUB_USER}" ] && echo -n "@${GITHUB_USER} " || echo -n "\u " \
+            && [ "$XIT" -ne "0" ] && echo -n "!➜" || echo -n " ➜"`'
+        local lightblue=''
+        local removecolor=''
+    fi
+
+    PS1="${user_and_xit_part} ${lightblue}\w${removecolor} \$ "
+    unset -f __bash_prompt
+}
+__bash_prompt
+export PROMPT_DIRTRIM=4
 
 # Set dircolors
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 if [ -f ~/.bash_aliases ]; then
