@@ -2,9 +2,14 @@
 
 alias j='jobs'
 
-alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
-alias l='ls'
-alias ll='ls -l'
+# Temporary to break my "ls" muscle memory
+# Also note: if '*' annotations become too common, bring back "--file-type"
+# alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
+# alias l='ls'
+# alias ll='ls -l'
+alias ls='echo \! && false'
+alias l='/bin/ls -GAhvF --color=auto --group-directories-first'
+alias ll='/bin/ls -l -GAhvF --color=auto --group-directories-first'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
