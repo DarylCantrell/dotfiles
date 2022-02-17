@@ -48,9 +48,15 @@ alias dns='git diff --name-status'
 alias 1ln='git log --oneline --first-parent'
 alias logid='git log --pretty="%C(yellow)%h %C(green)%<(12,trunc)%al %C(white)tree %t %C(brightred)parents %<(26,trunc)%p %C(white)%<(62,trunc)%s"'
 
-alias log='git log --decorate'
-alias log1='git log -1 --decorate'
-alias log2='git log -2 --decorate'
-alias log3='git log -3 --decorate'
-alias log5='git log -5 --decorate'
-alias log9='git log -9 --decorate'
+alias log='git log --decorate --show-signature'
+alias log1='log -1'
+alias log2='log -2'
+alias log3='log -3'
+alias log5='log -5'
+alias log9='log -9'
+
+### github/github
+
+if [ -f /workspaces/github/README.md ]; then
+    alias monasign='git commit --gpg-sign=27A08E3AFB8CDD4C0D4FE226AD3B4A12FAD9D319'
+fi
