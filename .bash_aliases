@@ -48,7 +48,7 @@ alias dns='git diff --name-status'
 alias 1ln='git log --oneline --first-parent'
 alias logid='git log --pretty="%C(yellow)%h %C(green)%<(12,trunc)%al %C(white)tree %t %C(brightred)parents %<(26,trunc)%p %C(white)%<(62,trunc)%s"'
 
-alias log='git log --decorate --show-signature'
+alias log='git log --decorate --show-signature --format=full'
 alias log1='log -1'
 alias log2='log -2'
 alias log3='log -3'
