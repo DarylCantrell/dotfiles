@@ -72,3 +72,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# These cause signature verification to fail when you push to a protected branch
+unset GIT_COMMITTER_EMAIL GIT_COMMITTER_NAME
+
