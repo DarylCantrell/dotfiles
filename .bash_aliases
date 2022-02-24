@@ -11,6 +11,8 @@ alias ls='echo \! && false'
 alias l='/bin/ls -GAhvF --color=auto --group-directories-first'
 alias ll='/bin/ls -l -GAhvF --color=auto --group-directories-first'
 
+alias path='realpath -e'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'

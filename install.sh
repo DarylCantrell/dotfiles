@@ -1,5 +1,8 @@
 #! /bin/sh
 
+test -d /workspaces/.codespaces/.persistedshare/dotfiles &&
+    ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
+
 # .bashrc
 test -f /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc &&
     echo >> ~/.bashrc &&
