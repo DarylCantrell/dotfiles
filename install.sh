@@ -26,4 +26,8 @@ if [ -f /workspaces/github/README.md -a -d /workspaces/.codespaces/.persistedsha
 
     # SSH private key files will be ignored with git's default 644 permissions
     chmod 600 /workspaces/.codespaces/.persistedshare/dotfiles/testKeys/*.rsa
+
+    # clon repo -- probably put this in its own script
+    # GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/testKeys/monalisa.rsa)" git clone ssh://git@localhost:3035/github/public-server.git
+    # git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/testKeys/monalisa.rsa)"
 fi
