@@ -7,7 +7,10 @@ alias j='jobs'
 # alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
 # alias l='ls'
 # alias ll='ls -l'
+
+alias dir='echo \! && false'
 alias ls='echo \! && false'
+
 alias l='/bin/ls -GAhvF --color=auto --group-directories-first'
 alias ll='/bin/ls -l -GAhvF --color=auto --group-directories-first'
 
