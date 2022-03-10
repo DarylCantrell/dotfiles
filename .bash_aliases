@@ -62,8 +62,28 @@ alias log9='log -9'
 
 alias logsig='log --show-signature'
 
+title() {
+  local title="$*"
+  if [ -z "$title" ]; then
+    title=" "
+  fi
+
+  echo -e -n "\e]0;${title}\a"
+}
+
 ### github/github
 
 if [ -f /workspaces/github/README.md ]; then
-    alias monasign='git commit --gpg-sign=27A08E3AFB8CDD4C0D4FE226AD3B4A12FAD9D319'
+  alias monasign='git commit --gpg-sign=27A08E3AFB8CDD4C0D4FE226AD3B4A12FAD9D319'
+
+  alias sqlrepos='mysql -D github_development_repositories'
+
+  alias gitauth='overmind c gitauth'
+
+  server() {
+    title "gh-server"
+    /workspaces/github/bin/server -d || true
+    title
+  }
 fi
+
