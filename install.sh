@@ -3,15 +3,13 @@
 test -d /workspaces/.codespaces/.persistedshare/dotfiles &&
     ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
 
-# .bashrc
+# Execute dotfiles/.bashrc at end of .bashrc
 test -f /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc &&
-    echo >> ~/.bashrc &&
-    echo source /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc >> ~/.bashrc
+    echo -e '\nsource /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc' >> ~/.bashrc
 
 # .bash_aliases
 test -f /workspaces/.codespaces/.persistedshare/dotfiles/.bash_aliases &&
-    echo >> ~/.bash_aliases &&
-    echo source /workspaces/.codespaces/.persistedshare/dotfiles/.bash_aliases >> ~/.bash_aliases
+    echo -e '\nsource /workspaces/.codespaces/.persistedshare/dotfiles/.bash_aliases' >> ~/.bash_aliases
 
 # .dircolors (overwrite)
 test -f /workspaces/.codespaces/.persistedshare/dotfiles/.dircolors &&
