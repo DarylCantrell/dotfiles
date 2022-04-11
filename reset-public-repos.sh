@@ -9,7 +9,7 @@ mkdir /workspaces/public-server
 cd /workspaces/public-server
 
 GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/monalisa.rsa)" \
-  git clone ssh://git@localhost:3035/github/public-server.git .
+	git clone ssh://git@localhost:3035/github/public-server.git .
 
 git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/monalisa.rsa)"
 
@@ -20,8 +20,8 @@ mkdir /workspaces/collab-public-server
 cd /workspaces/collab-public-server
 
 GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/collaborator.rsa)" \
-  git clone ssh://git@localhost:3035/github/public-server.git .
-  
+	git clone ssh://git@localhost:3035/github/public-server.git .
+
 git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/collaborator.rsa)"
 
 popd
