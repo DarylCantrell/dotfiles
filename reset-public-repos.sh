@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# This blows away your local changes (if any), and makes new clones of public-server for monalisa and collaborator.
+# You will want to run `add_ssh_keys.sh`` first.
+
 pushd /workspaces
 
 # Clone public-server as monalisa

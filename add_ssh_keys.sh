@@ -2,62 +2,44 @@
 
 # Parse dev SSH key files for monalisa and collaborator:
 
-monaPubKey=`sed 's/= .*/=/' ~/dotfiles/devKeys/monalisa.rsa.pub`
-monaFingerprint=$(
-	ssh-keygen -l -E SHA256 -f /root/dotfiles/devKeys/monalisa.rsa.pub |
-	/bin/sed -e 's/[^:]*SHA256:\([^ ]*\) .*/\1/g'
-)
+monaPublicKey=`sed 's/= .*/=/' ~/dotfiles/devKeys/monalisa.rsa.pub`
+monaFingerprint=$(ssh-keygen -l -E SHA256 -f ~/dotfiles/devKeys/monalisa.rsa.pub | awk -F '[:| ]' '{print($3)}')
 
-collabPubKey=`sed 's/= .*/=/' ~/dotfiles/devKeys/collaborator.rsa.pub`
-collabFingerprint=$(
-	ssh-keygen -l -E SHA256 -f /root/dotfiles/devKeys/collaborator.rsa.pub |
-	/bin/sed -e 's/[^:]*SHA256:\([^ ]*\) .*/\1/g'
-)
+collabPublicKey=`sed 's/= .*/=/' ~/dotfiles/devKeys/collaborator.rsa.pub`
+collabFingerprint=$(ssh-keygen -l -E SHA256 -f ~/dotfiles/devKeys/collaborator.rsa.pub | awk -F '[:| ]' '{print($3)}')
 
 # Insert dev keys into public_keys table:
 
 mysql -D github_development << EOF
-SELECT id INTO @mona_id FROM users WHERE login = 'monalisa';
-SELECT id INTO @collab_id FROM users WHERE login = 'collaborator';
+	SELECT id INTO @mona_id FROM users WHERE login = 'monalisa';
+	SELECT id INTO @collab_id FROM users WHERE login = 'collaborator';
 
-INSERT INTO public_keys
-	(user_id,
-	\`key\`,
-	username,
-	title,
-	created_at,
-	updated_at,
-	verified_at,
-	creator_id,
-	verifier_id,
-	created_by,
-	read_only,
-	fingerprint_sha256)
-VALUES (
-	@mona_id,
-	'${monaPubKey}',
-	'git',
-	'monalisa.rsa.pub',
-	now(),
-	now(),
-	now(),
-	@mona_id,
-	@mona_id,
-	'user',
-	0,
-	'${monaFingerprint}'
-),(
-	@collab_id,
-	'${collabPubKey}',
-	'git',
-	'collaborator.rsa.pub',
-	now(),
-	now(),
-	now(),
-	@collab_id,
-	@collab_id,
-	'user',
-	0,
-	'${collabFingerprint}'
-);
+	INSERT INTO public_keys (
+		user_id, creator_id, verifier_id,
+		\`key\`,
+		fingerprint_sha256,
+		title,
+		username,
+		created_by,
+		read_only,
+		created_at, updated_at, verified_at
+	) VALUES (
+		@mona_id, @mona_id, @mona_id,
+		'${monaPublicKey}',
+		'${monaFingerprint}',
+		'monalisa.rsa',
+		'git',
+		'user',
+		0,
+		now(), now(), now()
+	),(
+		@collab_id, @collab_id, @collab_id,
+		'${collabPublicKey}',
+		'${collabFingerprint}',
+		'collaborator.rsa',
+		'git',
+		'user',
+		0,
+		now(), now(), now()
+	);
 EOF

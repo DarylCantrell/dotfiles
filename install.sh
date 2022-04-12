@@ -1,29 +1,36 @@
 #! /bin/sh
 
+# Link from homedir to dotfiles repo
 test -d /workspaces/.codespaces/.persistedshare/dotfiles &&
-    ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
+	ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
 
 # Execute dotfiles/.bashrc at end of .bashrc
-test -f /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc &&
-    echo -e '\nsource /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc' >> ~/.bashrc
+test -f ~/dotfiles/.bashrc &&
+	echo -e '\nsource ~/dotfiles/.bashrc' >> ~/.bashrc
 
 # .bash_aliases
-test -f /workspaces/.codespaces/.persistedshare/dotfiles/.bash_aliases &&
-    echo -e '\nsource /workspaces/.codespaces/.persistedshare/dotfiles/.bash_aliases' >> ~/.bash_aliases
+test -f ~/dotfiles/.bash_aliases &&
+	echo -e '\nsource ~/dotfiles/.bash_aliases' >> ~/.bash_aliases
 
 # .dircolors (overwrite)
-test -f /workspaces/.codespaces/.persistedshare/dotfiles/.dircolors &&
-    ln -sf /workspaces/.codespaces/.persistedshare/dotfiles/.dircolors ~/.dircolors
+test -f ~/dotfiles/.dircolors &&
+	ln -sf ~/dotfiles/.dircolors ~/.dircolors
 
 # Stuff to do only on github/github
-if [ -f /workspaces/github/README.md -a -d /workspaces/.codespaces/.persistedshare/dotfiles/devKeys ]; then
+if [ -f /workspaces/github/README.md ]; then
 
-    # Add and trust monalisa GPG key
-    test -f /workspaces/github/README.md -a -r /workspaces/.codespaces/.persistedshare/dotfiles/devKeys/monalisa.gpg.sec &&
-        gpg --import /workspaces/.codespaces/.persistedshare/dotfiles/devKeys/monalisa.gpg.sec &&
-        echo 27A08E3AFB8CDD4C0D4FE226AD3B4A12FAD9D319:6: | gpg --import-ownertrust
+	# Some programs ignore secret key files if they have git's default 644 permissions
+	chmod -f 600 ~/dotfiles/devKeys/*.rsa
+	chmod -f 600 ~/dotfiles/devKeys/*.gpg.sec
 
-    # Some private key files will be ignored if they have git's default 644 permissions
-    chmod 600 /workspaces/.codespaces/.persistedshare/dotfiles/devKeys/*.rsa \
-        /workspaces/.codespaces/.persistedshare/dotfiles/devKeys/*.gpg.sec
+	# Add and trust monalisa GPG key, for signing commits.
+	if [ -f ~/dotfiles/devKeys/monalisa.gpg.sec ]; then
+		gpg --import ~/dotfiles/devKeys/monalisa.gpg.sec
+
+		gpg -k --with-colons octocat@github.com |
+			grep '^fpr:' |
+			cut -d: -f10 |
+			sed -e 's/$/:6:/g' |
+			gpg --import-ownertrust
+	fi
 fi
