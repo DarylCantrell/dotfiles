@@ -33,4 +33,8 @@ if [ -f /workspaces/github/README.md ]; then
 			sed -e 's/$/:6:/g' |
 			gpg --import-ownertrust
 	fi
+
+	# credential.helper config in github dev container don't work with dotFiles repo
+	test -f ~/dotfiles/.git/config &&
+		git config -f ~/dotfiles/.git/config 'credential.helper' ''
 fi
