@@ -97,5 +97,41 @@ if [ -f /workspaces/github/README.md ]; then
     overmind stop gitauth && BYEBUGDAP=1 /workspaces/github/script/gitauth-server --debug || true
     title
   }
+
+  pushnewbranch() {
+    local branch="$1"
+    if [ -z "$branch" ]; then
+      echo "Usage: $0 <branch>"
+      return 1
+    fi
+    local filename=`basename $branch`
+
+    git checkout main || return 1
+
+    git checkout -b $branch || return 1
+    echo $branch >> $filename
+    git add $filename
+    git commit -m "New $branch"
+    git push --set-upstream origin $branch
+
+    git checkout main
+  }
+
+  updatebranch() {
+    local branch="$1"
+    if [ -z "$branch" ]; then
+      echo "Usage: $0 <branch>"
+      return 1
+    fi
+    local filename=`basename $branch`
+
+    git checkout $branch || return 1
+    echo $branch >> $filename
+    git add $filename
+    git commit -m "Update $branch"
+    git push origin $branch
+
+    git checkout main
+  }
 fi
 
