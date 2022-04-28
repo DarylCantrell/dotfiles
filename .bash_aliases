@@ -98,40 +98,57 @@ if [ -f /workspaces/github/README.md ]; then
     title
   }
 
-  pushnewbranch() {
-    local branch="$1"
-    if [ -z "$branch" ]; then
-      echo "Usage: $0 <branch>"
+  newbranch() {
+    if [ -z "$@" ]; then
+      echo "Usage: newbranch <branch...>"
       return 1
     fi
-    local filename=`basename $branch`
 
-    git checkout main || return 1
+    for branch in $*; do
+      local filename=${branch//\//_}
 
-    git checkout -b $branch || return 1
-    echo $branch >> $filename
-    git add $filename
-    git commit -m "New $branch"
-    git push --set-upstream origin $branch
+      git checkout main || return 1
+      git checkout -b $branch || return 1
+
+      echo $branch >> $filename
+      git add $filename
+
+      git commit -m "New $branch"
+    done
 
     git checkout main
   }
 
-  updatebranch() {
-    local branch="$1"
-    if [ -z "$branch" ]; then
-      echo "Usage: $0 <branch>"
+  pushnewbranch() {
+    newbranch $*
+
+    git push --set-upstream origin $*
+  }
+
+  touchbranch() {
+    if [ -z "$@" ]; then
+      echo "Usage: touchbranch <branch...>"
       return 1
     fi
-    local filename=`basename $branch`
 
-    git checkout $branch || return 1
-    echo $branch >> $filename
-    git add $filename
-    git commit -m "Update $branch"
-    git push origin $branch
+    for branch in $*; do
+      local filename=${branch//\//_}
+
+      git checkout $branch || return 1
+
+      echo $branch >> $filename
+      git add $filename
+
+      git commit -m "Update $branch"
+    done
 
     git checkout main
+  }
+
+  pushtouchbranch() {
+    touchbranch $*
+
+    git push origin $*
   }
 fi
 

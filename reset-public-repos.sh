@@ -16,6 +16,12 @@ GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/monalisa.rsa)" \
 
 git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/monalisa.rsa)"
 
+git config --local --unset user.name
+git config --local --add user.name monalisa
+
+git config --local --unset user.email
+git config --local --add user.email octocat@github.com
+
 # Clone public-server as collaborator
 
 rm -rf /workspaces/collab-public-server
@@ -26,5 +32,11 @@ GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/collaborator.rsa)" \
 	git clone ssh://git@localhost:3035/github/public-server.git .
 
 git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/collaborator.rsa)"
+
+git config --local --unset user.name
+git config --local --add user.name collaborator
+
+git config --local --unset user.email
+git config --local --add user.email collaborator@github.com
 
 popd
