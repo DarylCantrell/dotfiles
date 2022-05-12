@@ -34,7 +34,7 @@ if [ -f /workspaces/github/README.md ]; then
 			gpg --import-ownertrust
 	fi
 
-	# credential.helper config in github dev container don't work with dotFiles repo
+	# credential.helper config in github dev container doesn't work with dotFiles repo
 	test -f ~/dotfiles/.git/config &&
 		git config -f ~/dotfiles/.git/config 'credential.helper' ''
 fi
