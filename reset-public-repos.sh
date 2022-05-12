@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# This blows away your local changes (if any), and makes new clones of public-server for monalisa and collaborator.
+# This blows away your local changes (if any), and makes new clones of public-server for monalisa, collaborator, and outsider.
 # You will want to run `add_ssh_keys.sh`` first.
 
 pushd /workspaces
@@ -41,5 +41,22 @@ git config --local --add user.name collaborator
 
 git config --local --unset user.email
 git config --local --add user.email collaborator@github.com
+
+# Clone public-server as outsider
+
+rm -rf /workspaces/outsider-public-server
+mkdir /workspaces/outsider-public-server
+cd /workspaces/outsider-public-server
+
+GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/outsider.rsa)" \
+	git clone ssh://git@localhost:3035/github/public-server.git .
+
+git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/outsider.rsa)"
+
+git config --local --unset user.name
+git config --local --add user.name outsider
+
+git config --local --unset user.email
+git config --local --add user.email outsider@github.com
 
 popd
