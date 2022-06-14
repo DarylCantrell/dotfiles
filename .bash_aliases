@@ -11,8 +11,8 @@ alias j='jobs'
 alias dir='echo \! && false'
 alias ls='echo \! && false'
 
-alias l='/bin/ls -GAhvF --color=auto --group-directories-first'
-alias ll='/bin/ls -l -GAhvF --color=auto --group-directories-first'
+alias l='/bin/ls -GAHvF --color=auto --group-directories-first'
+alias ll='/bin/ls -l -GAHvF --color=auto --group-directories-first'
 
 alias path='realpath -e'
 
@@ -113,7 +113,7 @@ if [ -f /workspaces/github/README.md ]; then
       git checkout main || return 1
       git checkout -b $branch || return 1
 
-      echo $branch >> $filename
+      echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
       git commit -m "New $branch"
@@ -139,7 +139,7 @@ if [ -f /workspaces/github/README.md ]; then
 
       git checkout $branch || return 1
 
-      echo $branch >> $filename
+      echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
       git commit -m "Update $branch"
