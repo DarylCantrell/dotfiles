@@ -60,6 +60,7 @@ alias log='echo "██   ██   ██   ██   ██   ██   ██   
 alias log1='log -1'
 alias log2='log -2'
 alias log3='log -3'
+alias log4='log -4'
 alias log5='log -5'
 alias log9='log -9'
 
@@ -79,7 +80,8 @@ title() {
 if [ -f /workspaces/github/README.md ]; then
   alias monasign='git commit --gpg-sign=27A08E3AFB8CDD4C0D4FE226AD3B4A12FAD9D319'
 
-  alias sqlrepos='mysql -D github_development_repositories'
+  #alias sqlrepos='mysql -D github_development_repositories'
+  alias sql=/workspaces/github/bin/dbconsole
 
   alias gitauth='overmind c gitauth'
 
@@ -134,18 +136,20 @@ if [ -f /workspaces/github/README.md ]; then
       return 1
     fi
 
+    local currentBranch = `git branch --show-current`
+
     for branch in $*; do
-      local filename=${branch//\//_}
+      local filename=${branch//\//_}.txt
 
       git checkout $branch || return 1
 
       echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
-      git commit -m "Update $branch"
+      git commit -m "Update branch $branch"
     done
 
-    git checkout main
+    git checkout $currentBranch
   }
 
   pushtouchbranch() {

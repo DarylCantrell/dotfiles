@@ -37,4 +37,6 @@ if [ -f /workspaces/github/README.md ]; then
 	# credential.helper config in github dev container doesn't work with dotFiles repo
 	test -f ~/dotfiles/.git/config &&
 		git config -f ~/dotfiles/.git/config 'credential.helper' ''
+
+	# git config -f /workspaces/authzd/.git/config 'credential.helper' ''
 fi
