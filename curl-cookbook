@@ -1,0 +1,13 @@
+collab_pat='collaborator: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'
+
+# Merge existing PR -- data args are all optional
+curl -u $collab_pat \
+ --request PUT \
+ --header "Content-Type: application/json" \
+ --data '{
+  "commit_title": "commit_title",
+  "commit_message": "commit_message",
+  "sha": "cf2adc2b8ee9dbe4a3463754c6c2c1014e012060",
+  "merge_method": "merge"
+}' \
+https://api.github.localhost/repos/github/public-server/pulls/5/merge
