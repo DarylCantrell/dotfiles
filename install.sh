@@ -34,6 +34,11 @@ if [ -f /workspaces/github/README.md ]; then
 			gpg --import-ownertrust
 	fi
 
+	cat >> /etc/hosts <<-EOF
+		127.0.0.1	github.localhost
+		127.0.0.1	api.github.localhost
+	EOF
+
 	# credential.helper config in github dev container doesn't work with dotFiles repo
 	test -f ~/dotfiles/.git/config &&
 		git config -f ~/dotfiles/.git/config 'credential.helper' ''
