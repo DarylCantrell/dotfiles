@@ -110,7 +110,7 @@ if [ -f /workspaces/github/README.md ]; then
     fi
 
     for branch in $*; do
-      local filename=${branch//\//_}
+      local filename=${branch//\//_}.txt
 
       git checkout main || return 1
       git checkout -b $branch || return 1
