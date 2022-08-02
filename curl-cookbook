@@ -1,4 +1,4 @@
-collab_pat='collaborator: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'
+collab_pat='collaborator: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'
 
 # Merge existing PR -- data args are all optional
 curl -u $collab_pat \
@@ -11,3 +11,18 @@ curl -u $collab_pat \
   "merge_method": "merge"
 }' \
 https://api.github.localhost/repos/github/public-server/pulls/5/merge
+
+# Post status to commit
+# error, failure, pending, success
+curl -u $collab_pat \
+ --request POST \
+ --header "Content-Type: application/json" \
+ --header "Accept: application/vnd.github+json" \
+ --data '{
+  "state":"success",
+  "target_url":"https://example.com/build/status",
+  "description":"Sample status bar",
+  "context":"bar"
+  }' \
+https://api.github.localhost/repos/github/public-server/statuses/ec9bd01c96b0833fae7bc6f9c328d3c6e4d0627b
+
