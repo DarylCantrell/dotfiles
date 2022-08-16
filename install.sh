@@ -34,6 +34,18 @@ if [ -f /workspaces/github/README.md ]; then
 			gpg --import-ownertrust
 	fi
 
+	# Add and trust collaborator GPG key, for signing commits.
+	if [ -f ~/dotfiles/devKeys/collaborator.gpg.sec ]; then
+		gpg --import ~/dotfiles/devKeys/collaborator.gpg.sec
+
+		gpg -k --with-colons collaborator@github.com |
+			grep '^fpr:' |
+			cut -d: -f10 |
+			sed -e 's/$/:6:/g' |
+			gpg --import-ownertrust
+	fi
+
+  # Git doesn't seem to like the default GPG
 	git config --global --add gpg.program gpg2
 
 	cat >> /etc/hosts <<-EOF
