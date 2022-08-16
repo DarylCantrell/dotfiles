@@ -79,6 +79,7 @@ title() {
 
 if [ -f /workspaces/github/README.md ]; then
   alias monasign='git commit --gpg-sign=AD3B4A12FAD9D319'
+  alias collabsign='git commit --gpg-sign=367D8DF8A23D2BAC'
 
   #alias sqlrepos='mysql -D github_development_repositories'
   alias sql=/workspaces/github/bin/dbconsole
