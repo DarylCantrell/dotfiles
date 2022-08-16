@@ -23,7 +23,7 @@ git config --local --unset user.email
 git config --local --add user.email octocat@github.com
 
 git config --local --unset gpg.program
-git config --local --add gpg.program /usr/bin/gpg
+#git config --local --add gpg.program /usr/bin/gpg
 
 # Clone public-server as collaborator
 

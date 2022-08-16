@@ -34,6 +34,8 @@ if [ -f /workspaces/github/README.md ]; then
 			gpg --import-ownertrust
 	fi
 
+	git config --global --add gpg.program gpg2
+
 	cat >> /etc/hosts <<-EOF
 		127.0.0.1	github.localhost
 		127.0.0.1	api.github.localhost
