@@ -92,18 +92,6 @@ if [ -f /workspaces/github/README.md ]; then
     title
   }
 
-  server_debug() {
-    title "gh-server-debug"
-    BYEBUGDAP=1 /workspaces/github/bin/server -d || true
-    title
-  }
-
-  gitauth_debug() {
-    title "gitauthd-debug"
-    overmind stop gitauth && BYEBUGDAP=1 /workspaces/github/script/gitauth-server --debug || true
-    title
-  }
-
   newbranch() {
     if [ -z "$@" ]; then
       echo "Usage: newbranch <branch...>"
