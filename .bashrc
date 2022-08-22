@@ -34,20 +34,32 @@ __bash_prompt() {
     esac
 
     if [ -n "$color_prompt" ]; then
-        local user_and_xit_part='`export XIT=$? \
-            && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
-            && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+        local user_part=`[ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER}" || echo -n "\[\033[0;32m\]\u"`
         local lightblue=`echo -n '\[\033[1;34m\]'`
         local removecolor=`echo -n '\[\033[0m\]'`
     else
-        local user_and_xit_part='`export XIT=$? \
-            && [ ! -z "${GITHUB_USER}" ] && echo -n "@${GITHUB_USER} " || echo -n "\u " \
-            && [ "$XIT" -ne "0" ] && echo -n "!➜" || echo -n " ➜"`'
+        local user_part=`[ ! -z "${GITHUB_USER}" ] && echo -n "@${GITHUB_USER}" || echo -n "\u"`
         local lightblue=''
         local removecolor=''
     fi
 
-    PS1="${user_and_xit_part} ${lightblue}\w${removecolor} \$ "
+    # Code to colorize the arrow in the prompt based on exit status is obsolete and could be removed at some point:
+    #
+    # if [ -n "$color_prompt" ]; then
+    #     local user_and_xit_part='`export XIT=$? \
+    #         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
+    #         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+    #     local lightblue=`echo -n '\[\033[1;34m\]'`
+    #     local removecolor=`echo -n '\[\033[0m\]'`
+    # else
+    #     local user_and_xit_part='`export XIT=$? \
+    #         && [ ! -z "${GITHUB_USER}" ] && echo -n "@${GITHUB_USER} " || echo -n "\u " \
+    #         && [ "$XIT" -ne "0" ] && echo -n "!➜" || echo -n " ➜"`'
+    #     local lightblue=''
+    #     local removecolor=''
+    # fi
+
+    PS1="${user_part} ${lightblue}\w${removecolor} \$ "
     unset -f __bash_prompt
 }
 __bash_prompt

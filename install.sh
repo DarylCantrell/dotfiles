@@ -23,11 +23,14 @@ if [ -f /workspaces/github/README.md ]; then
 	chmod -f 600 ~/dotfiles/devKeys/*.rsa
 	chmod -f 600 ~/dotfiles/devKeys/*.gpg.sec
 
+  # Git doesn't seem to like the default GPG
+	git config --global --add gpg.program gpg2
+
 	# Add and trust monalisa GPG key, for signing commits.
 	if [ -f ~/dotfiles/devKeys/monalisa.gpg.sec ]; then
-		gpg --import ~/dotfiles/devKeys/monalisa.gpg.sec
+		gpg2 --import ~/dotfiles/devKeys/monalisa.gpg.sec
 
-		gpg -k --with-colons octocat@github.com |
+		gpg2 -k --with-colons octocat@github.com |
 			grep '^fpr:' |
 			cut -d: -f10 |
 			sed -e 's/$/:6:/g' |
@@ -36,17 +39,20 @@ if [ -f /workspaces/github/README.md ]; then
 
 	# Add and trust collaborator GPG key, for signing commits.
 	if [ -f ~/dotfiles/devKeys/collaborator.gpg.sec ]; then
-		gpg --import ~/dotfiles/devKeys/collaborator.gpg.sec
+		gpg2 --import ~/dotfiles/devKeys/collaborator.gpg.sec
 
-		gpg -k --with-colons collaborator@github.com |
+		gpg2 -k --with-colons collaborator@github.com |
 			grep '^fpr:' |
 			cut -d: -f10 |
 			sed -e 's/$/:6:/g' |
 			gpg --import-ownertrust
 	fi
 
-  # Git doesn't seem to like the default GPG
-	git config --global --add gpg.program gpg2
+	# Add and verify dev server's GPG key, used by server to sign web edits, merges, etc.
+	if [ -f ~/dotfiles/devKeys/devServerKey.gpg.pub ]; then
+		gpg2 --import ~/dotfiles/devKeys/devServerKey.gpg.pub
+		echo 'y' | gpg2 --command-fd 0 --sign-key 08A088ACEF151AF6
+	fi
 
 	cat >> /etc/hosts <<-EOF
 		127.0.0.1	github.localhost
