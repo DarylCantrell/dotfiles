@@ -40,6 +40,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias stat='git status'
 
+alias fixup='git commit --amend --no-edit'
+
+alias staged='diff --staged'
 alias unstage='git restore --staged'
 
 alias diff='git diff -w'
@@ -85,6 +88,8 @@ if [ -f /workspaces/github/README.md ]; then
   alias sql=/workspaces/github/bin/dbconsole
 
   alias gitauth='overmind c gitauth'
+
+  alias irb=/workspaces/github/bin/irb
 
   server() {
     title "gh-server"
