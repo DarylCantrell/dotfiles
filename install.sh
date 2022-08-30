@@ -19,11 +19,15 @@ test -f ~/dotfiles/.dircolors &&
 # Stuff to do only on github/github
 if [ -f /workspaces/github/README.md ]; then
 
-	# Some programs ignore secret key files if they have git's default 644 permissions
+	# Speed up global search in VS Code by ignoring some files which are not ignored by git
+	cp ~/dotfiles/.rgignore /workspaces/github
+	echo /.rgignore >> /workspaces/github/.git/info/exclude
+
+	# Some programs ignore secret key files if they have default 644 permissions
 	chmod -f 600 ~/dotfiles/devKeys/*.rsa
 	chmod -f 600 ~/dotfiles/devKeys/*.gpg.sec
 
-  # Git doesn't seem to like the default GPG
+	# Git doesn't seem to like the default GPG
 	git config --global --add gpg.program gpg2
 
 	# Add and trust monalisa GPG key, for signing commits.
