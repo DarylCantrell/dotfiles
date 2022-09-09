@@ -1,3 +1,5 @@
+exit
+
 collab_pat='collaborator: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'
 
 # Merge existing PR -- data args are all optional
