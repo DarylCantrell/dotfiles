@@ -33,8 +33,12 @@ curl -u $collab_pat \
 ## Github-App
 ## ==========
 
+# Step 0: Go to GH App page and get:
 
-# Step 1: Get pkcs pubkey from pem
+- App ID from top of page
+- Private key from bottom of page
+
+# Step 1: Extract pkcs pubkey from pem private key
 
 openssl rsa -in testapp1.2022-08-05.private-key.pem -outform PEM -pubout -out testapp1.2022-08-05.public-key.pkcs1
 
@@ -42,39 +46,49 @@ openssl rsa -in testapp1.2022-08-05.private-key.pem -outform PEM -pubout -out te
 
 echo \"iat\": $(expr `date +%s` - 60), ; echo \"exp\": $(expr `date +%s` + 600), # now -1min / +10min
 
+# Use app id as "iss" value. JWT contents should look like this:
+
+HEADER:
 {
   "alg": "RS256",
   "typ": "JWT"
 }
+PAYLOAD:
 {
 "iat": 1659819187,
 "exp": 1659819847,
 "iss": "1"
 }
 
-# Step 3: Get installation id
+# Step 3 (possibly skippable): Get installation id from list of places where app has been installed
+# NOTE: This shows you all installations for an app. If you have only one installation of interest,
+# a short cut is going to http://localhost/ORG/REPO/settings/installations, click Configure on the
+# app and look at the URL for the installation id. Then skip to step 4.
 
 app_jwt='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTk5MTAxNzIsImV4cCI6MTY1OTkxMDgzMiwiaXNzIjoiMSJ9.kaeQsXrpbfNlLnPXhE9w-meAnBFj-MW0CcG7r8tZ5u1sfN8Zg7jiPdy26aJwzX17PJpoI_LuH444Od_t1z5oftfDzjMO-t0InupdsiDebznUm2zzDfyxe_KIyqCNlpowpllWKQ5jQTvTumhUaeMbCVN1JXdFimYZAfOFas5jEi8ZQ5QYH3U-rU0BNyqSLJef-ODnf64ZP9yv2tdJOlrIdrVtlzlX7u0BhHeEjtXB8wZeneV6YYlqQ3OqVRsiq3e4rNGCS0PuGwkugPYRY8k8wLz1T6Enp2KAsksnU7f-fPLQJ1bVu4GphdjKlirFTuYSMCCRVsQJysqs_F9x7V8b-Q'
 
 curl -i -X GET \
   -H "Authorization: Bearer $app_jwt" \
   -H "Accept: application/vnd.github+json" \
-https://api.github.localhost/app/installations
+http://api.github.localhost/app/installations
+
 #https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/app/installations
 
-# Step 4: use JWT token to get 1hr access token
+# Step 4: Use JWT token and installation id to create 1hr access token for that installation.
 
 curl -i -X POST \
   -H "Authorization: Bearer $app_jwt" \
   -H "Accept: application/vnd.github+json" \
-https://api.darylcantrell-0577bb434cff36aeb.ghe-test.ninja/app/installations/1/access_tokens
+http://api.github.localhost/app/installations/**installation_id from above**/access_tokens
 
+#https://api.darylcantrell-0577bb434cff36aeb.ghe-test.ninja/app/installations/1/access_tokens
 
-# Step 5: Use access token to make API calls as app
-token='ghs_n8wBkTXcf9apM6l0UvMog8VZ03ue3U0VZwW0'
+# Step 5: Use 1hr access token to make API calls as app
+
+token3='ghs_n8wBkTXcf9apM6l0UvMog8VZ03ue3U0VZwW0'
 curl -i \
  --request POST \
- --header "Authorization: token $token" \
+ --header "Authorization: token $token3" \
  --header "Content-Type: application/json" \
  --header "Accept: application/vnd.github+json" \
  --data '{
@@ -83,4 +97,6 @@ curl -i \
   "description":"App status bar",
   "context":"bar"
   }' \
-  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
+http://api.github.localhost/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
+
+#https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
