@@ -11,7 +11,9 @@ base64Encode() { base64 --wrap=0 | tr '+/' '-_' | tr -d '='; }
 
 pubKeyFile=${privKeyFile%.pem}.pkcs1
 
-openssl rsa -in $privKeyFile -outform PEM -pubout -out $pubKeyFile
+if [[ ! -f $pubKeyFile ]]; then
+  openssl rsa -in $privKeyFile -outform PEM -pubout -out $pubKeyFile
+fi
 
 header='{
   "alg": "RS256",
