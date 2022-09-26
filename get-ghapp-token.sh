@@ -1,11 +1,15 @@
-if [[ $# != 3 ]]; then
-  echo "Usage: gentoken <private-key-file> <app-id> <installation-id>"
+#! /bin/bash
+
+if [ $# -lt 3 -o $# -gt 4 ] ; then
+  echo "Usage: $(basename $BASH_SOURCE) <private-key-file> <app-id> <installation-id> [<server-url>]"
   exit 1
 fi
 
 privKeyFile=$1
 appId=$2
 instId=$3
+url=${4:-"http://api.github.localhost"}
+url=${url%/}
 
 base64Encode() { base64 --wrap=0 | tr '+/' '-_' | tr -d '='; }
 
@@ -36,9 +40,9 @@ jwt="${signedContent}.${signature}"
 curlOutput=$(curl -s --fail-with-body -X POST \
   -H "Authorization: Bearer $jwt" \
   -H "Accept: application/vnd.github+json" \
-http://api.github.localhost/app/installations/$instId/access_tokens)
+  "$url/app/installations/$instId/access_tokens")
 
-if [[ $? != 0 ]]; then
+if [ $? -ne 0 ] ; then
   echo "$curlOutput" 1>&2
   exit 1
 fi

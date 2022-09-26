@@ -100,3 +100,19 @@ curl -i \
 http://api.github.localhost/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
 
 #https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
+
+# Make a private test repo
+mkprv() {
+  curl -i \
+  --request POST \
+  --header "Authorization: token $token3" \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/vnd.github+json" \
+  --data '{
+    "description": "desc",
+    "homepage": "https://google.com",
+    "private": true,
+    "auto_init": true,
+    "name": "prv_test_'$1'" }' \
+  http://api.github.localhost/orgs/github/repos
+}
