@@ -93,6 +93,7 @@ if [ -f /workspaces/github/README.md ]; then
 
   server() {
     title "gh-server"
+    sleep 7
     /workspaces/github/bin/server -d || true
     title
   }
