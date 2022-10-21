@@ -1,0 +1,28 @@
+query whoami {
+  viewer {
+    login
+  }
+}
+
+query getRules {
+  repository(owner: "github", name: "public-server") {
+    id
+    branchProtectionRules(first: 20) {
+      nodes {
+        id
+        databaseId
+        pattern
+        requiredApprovingReviewCount
+      }
+    }
+  }
+}
+
+mutation updateMinApprovals {
+  updateBranchProtectionRule(input: {branchProtectionRuleId: "BPR_kwADBg", requiredApprovingReviewCount: 3}) {
+    branchProtectionRule {
+      pattern
+      requiredApprovingReviewCount
+    }
+  }
+}

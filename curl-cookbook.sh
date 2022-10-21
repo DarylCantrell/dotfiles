@@ -116,3 +116,40 @@ mkprv() {
     "name": "prv_test_'$1'" }' \
   http://api.github.localhost/orgs/github/repos
 }
+
+# Create branch protection
+mkbp() {
+  curl -i \
+  --request PUT \
+  --header "Authorization: token $2" \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/vnd.github+json" \
+  --data '{
+    "required_status_checks": null,
+    "required_pull_request_reviews": {
+      "required_approving_review_count": '$3'
+    },
+    "restrictions": null,
+    "enforce_admins": false
+  }' \
+  http://api.github.localhost/repos/github/public-server/branches/$1/protection
+}
+
+# Get branch protection
+getbp() {
+  curl -i \
+  --request GET \
+  --header "Authorization: token $2" \
+  --header "Accept: application/vnd.github+json" \
+  http://localhost/github/public-server/settings/branch_protection_rules/3
+  http://api.github.localhost/repos/github/public-server/branches/$1/protection
+}
+
+
+
+    "required_signatures": false,
+    "enforce_admins": false,
+    "required_linear_history": false
+
+"required_pull_request_reviews":{"dismissal_restrictions":{"users":["octocat"],"teams":["justice-league"]},"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":2,"bypass_pull_request_allowances":{"users":["octocat"],"teams":["justice-league"]}},"restrictions":{"users":["octocat"],"teams":["justice-league"],"apps":["super-ci"]},"required_linear_history":true,"allow_force_pushes":true,"allow_deletions":true,"block_creations":true,"required_conversation_resolution":true}'
+Response
