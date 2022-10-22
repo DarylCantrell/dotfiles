@@ -1,28 +1,62 @@
-query whoami {
-  viewer {
-    login
+{
+  query whoami {
+    viewer {
+      login
+    }
   }
-}
 
-query getRules {
-  repository(owner: "github", name: "public-server") {
-    id
-    branchProtectionRules(first: 20) {
-      nodes {
+  query getBranchRules {
+    repository(owner: "github", name: "public-server") {
+      id
+      branchProtectionRules(first: 10) {
+        nodes {
+          id
+          databaseId
+          pattern
+          requiresApprovingReviews
+          requiredApprovingReviewCount
+        }
+      }
+    }
+  }
+
+  mutation createBranchRule($repoId: ID!, $pattern: String!, $count: Int!) {
+    createBranchProtectionRule(input:
+      {
+        repositoryId: $repoId,
+        pattern: $pattern,
+        requiresApprovingReviews: true,
+        requiredApprovingReviewCount: $count
+      })
+    {
+      branchProtectionRule {
         id
-        databaseId
         pattern
         requiredApprovingReviewCount
       }
     }
   }
-}
 
-mutation updateMinApprovals {
-  updateBranchProtectionRule(input: {branchProtectionRuleId: "BPR_kwADBg", requiredApprovingReviewCount: 3}) {
-    branchProtectionRule {
-      pattern
-      requiredApprovingReviewCount
+  mutation updateBranchRule($ruleId: ID!, $count: Int!) {
+    updateBranchProtectionRule(input: {branchProtectionRuleId: $ruleId, requiredApprovingReviewCount: $count}) {
+      branchProtectionRule {
+        id
+        pattern
+        requiredApprovingReviewCount
+      }
     }
+  }
+
+  mutation deleteBranchRule($ruleId: ID!) {
+    deleteBranchProtectionRule(input: {branchProtectionRuleId: $ruleId}) {
+      clientMutationId
+    }
+  }
+
+  variables: {
+    "repoId": "R_kgAD",
+    "ruleId": "BPR_kwADCw",
+    "pattern": "main",
+    "count": 2
   }
 }

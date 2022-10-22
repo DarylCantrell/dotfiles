@@ -141,10 +141,20 @@ getbp() {
   --request GET \
   --header "Authorization: token $2" \
   --header "Accept: application/vnd.github+json" \
-  http://localhost/github/public-server/settings/branch_protection_rules/3
   http://api.github.localhost/repos/github/public-server/branches/$1/protection
 }
 
+# Delete branch protection
+rmbp() {
+  curl -i \
+  --request DELETE \
+  --header "Authorization: token $2" \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/vnd.github+json" \
+  http://localhost/github/public-server/settings/branch_protection_rules/$1
+}
+
+  http://api.github.localhost/repos/github/public-server/branches/$1/protection
 
 
     "required_signatures": false,
