@@ -1,13 +1,14 @@
 #! /bin/bash
 
 if [ $# -lt 3 -o $# -gt 4 ] ; then
-  echo "Usage: $(basename $BASH_SOURCE) <private-key-file> <app-id> <installation-id> [<server-url>]"
+  echo "Usage: $(basename $BASH_SOURCE) <private-key-file> <app-id> <installation-id> [<server-api-url>]"
   exit 1
 fi
 
 privKeyFile=$1
 appId=$2
 instId=$3
+url=${4:-"$apiUrl"}
 url=${4:-"http://api.github.localhost"}
 url=${url%/}
 

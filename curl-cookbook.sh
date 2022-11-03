@@ -85,21 +85,22 @@ http://api.github.localhost/app/installations/**installation_id from above**/acc
 
 # Step 5: Use 1hr access token to make API calls as app
 
-token3='ghs_n8wBkTXcf9apM6l0UvMog8VZ03ue3U0VZwW0'
-curl -i \
- --request POST \
- --header "Authorization: token $token3" \
- --header "Content-Type: application/json" \
- --header "Accept: application/vnd.github+json" \
- --data '{
-  "state":"success",
-  "target_url":"https://example.com/build/status",
-  "description":"App status bar",
-  "context":"bar"
-  }' \
-http://api.github.localhost/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
-
-#https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
+poststat() {
+  curl -i \
+    --request POST \
+    --header "Authorization: token $2" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/vnd.github+json" \
+    --data '{
+      "state":"success",
+      "target_url":"https://example.com/build/status",
+      "description":"Status '$3'",
+      "context":"foo"
+    }' \
+    https://api.darylcantrell-0348810741b29a732.ghe-test.com/repos/org1/repo1/statuses/$1
+}
+#  http://api.github.localhost/repos/Org1/Repo1/statuses/$1
+#  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/$1
 
 # Make a private test repo
 mkprv() {
