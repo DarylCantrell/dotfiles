@@ -2,12 +2,11 @@
 
 alias j='jobs'
 
-# Temporary to break my "ls" muscle memory
+# Temporary aliases to break my "ls" muscle memory
 # Also note: if '*' annotations become too common, bring back "--file-type"
 # alias ls='ls -GAhvF --color=auto --group-directories-first --file-type'
 # alias l='ls'
 # alias ll='ls -l'
-
 alias dir='echo \! && false'
 alias ls='echo \! && false'
 
@@ -32,7 +31,9 @@ alias d='dirs'
 alias pd='pushd'
 alias pp='popd'
 
-### Add an "alert" alias for long running commands.  Use like so: sleep 10; alert
+alias csname='echo $CODESPACE_NAME'
+
+### Add an "alert" alias for long running commands.  Example: sleep 10; alert
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
