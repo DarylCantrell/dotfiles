@@ -11,6 +11,10 @@ instId=$3
 url=${4:-"http://api.github.localhost"}
 url=${url%/}
 
+if [[ $url != *://api.* ]] ; then
+  echo -e "*** WARNING: Expected URL to start with 'api.', for example: https://api.github.com\n"
+fi
+
 base64Encode() { base64 --wrap=0 | tr '+/' '-_' | tr -d '='; }
 
 pubKeyFile=${privKeyFile%.pem}.pkcs1
