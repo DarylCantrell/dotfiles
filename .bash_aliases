@@ -56,6 +56,7 @@ alias dns='git diff --name-status'
 
 alias 1ln='git log -15 --oneline --first-parent'
 alias logid='git log --pretty="%C(yellow)%h %C(green)%<(12,trunc)%al %C(white)tree %t %C(brightred)parents %<(26,trunc)%p %C(white)%<(62,trunc)%s"'
+alias graph='git log -10 --all --decorate --oneline --graph'
 
 # git log -2 --decorate --format='%C(yellow)commit %H%n%p%nAuthor: %aN <%aE>%nCommit: %cN <%cE> %C(red)%cd%n'
 # git log -2 --decorate --format='%C(yellow)Commit: %H %C(auto)%d%nParent: %p%nAuthor: %aN <%aE>%nCommtr: %cN <%cE> %C(red)%cd%n%n%s%n'
@@ -149,9 +150,15 @@ if [ -f /workspaces/github/README.md ]; then
   }
 
   pushtouchbranch() {
+    local force=
+    if [[ "$1" == "-f" ]]; then
+      force=-f
+      shift
+    fi
+
     touchbranch $*
 
-    git push origin $*
+    git push $force origin $*
   }
 fi
 

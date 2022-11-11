@@ -12,7 +12,14 @@ curl -u $collab_pat \
   "sha": "cf2adc2b8ee9dbe4a3463754c6c2c1014e012060",
   "merge_method": "merge"
 }' \
-https://api.github.localhost/repos/github/public-server/pulls/5/merge
+http://api.github.localhost/repos/github/public-server/pulls/5/merge
+
+# Get merge commit for existing PR
+pr_getmerge() {
+  curl -s -X GET \
+    -H "Authorization: Bearer $2" \
+  http://api.github.localhost/repos/github/public-server/pulls/$1 | jq -r .merge_commit_sha
+}
 
 # Post status to commit
 # error, failure, pending, success

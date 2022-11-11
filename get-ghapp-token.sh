@@ -52,4 +52,4 @@ if [ $? -ne 0 ] ; then
   exit 1
 fi
 
-jq -r '.token' <<< "$curlOutput"
+jq -r .token <<< "$curlOutput"
