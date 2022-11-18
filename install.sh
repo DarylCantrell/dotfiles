@@ -20,8 +20,10 @@ test -f ~/dotfiles/.dircolors &&
 if [ -f /workspaces/github/README.md ]; then
 
 	# Speed up global search in VS Code by ignoring some files which are not ignored by git
-	cp ~/dotfiles/.rgignore /workspaces/github
-	echo /.rgignore >> /workspaces/github/.git/info/exclude
+	if [ -f ~/dotfiles/.rgignore ]; then
+	  cp ~/dotfiles/.rgignore /workspaces/github
+	  (cd /workspaces/github && git update-index --assume-unchanged .rgignore)
+	fi
 
 	# Some programs ignore secret key files if they have default 644 permissions
 	chmod -f 600 ~/dotfiles/devKeys/*.rsa

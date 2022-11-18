@@ -1,9 +1,0 @@
-node_modules
-vendor/speedscope
-vendor/licenses
-app/api/description
-app/api/schemas
-vendor/gitignore
-test/fixtures
-**/data/**
-# public/static
