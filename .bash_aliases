@@ -133,7 +133,7 @@ if [ -f /workspaces/github/README.md ]; then
       return 1
     fi
 
-    local currentBranch = `git branch --show-current`
+    local currentBranch=`git branch --show-current`
 
     for branch in $*; do
       local filename=${branch//\//_}.txt

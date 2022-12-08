@@ -1,0 +1,3 @@
+bin/toggle-feature-flag enable edit_repo_protections_fine_grained_perm
+bin/toggle-feature-flag enable push_policies
+bin/toggle-feature-flag enable repo_org_rules
