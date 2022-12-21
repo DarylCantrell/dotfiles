@@ -106,19 +106,23 @@ if [ -f /workspaces/github/README.md ]; then
       return 1
     fi
 
+    local currentBranch=`git branch --show-current`
+    if [ -z "$currentBranch" ]; then
+      currentBranch=`git rev-parse --verify HEAD`
+    fi
+
     for branch in $*; do
       local filename=${branch//\//_}.txt
 
-      git checkout main || return 1
       git checkout -b $branch || return 1
 
       echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
-      git commit -m "New $branch"
-    done
+      git commit -m "New branch $branch" || return 1
 
-    git checkout main
+      git checkout $currentBranch
+    done
   }
 
   pushnewbranch() {
@@ -134,6 +138,9 @@ if [ -f /workspaces/github/README.md ]; then
     fi
 
     local currentBranch=`git branch --show-current`
+    if [ -z "$currentBranch" ]; then
+      currentBranch=`git rev-parse --verify HEAD`
+    fi
 
     for branch in $*; do
       local filename=${branch//\//_}.txt
