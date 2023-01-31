@@ -80,6 +80,15 @@ title() {
   echo -e -n "\e]0;${title}\a"
 }
 
+fetchout() {
+  if [ -z "$@" ]; then
+    echo "Usage: fetchout <branch>"
+    return 1
+  fi
+
+  git fetch origin "$@" && git checkout "$@"
+}
+
 ### github/github
 
 if [ -f /workspaces/github/README.md ]; then
@@ -119,7 +128,7 @@ if [ -f /workspaces/github/README.md ]; then
       echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
-      git commit -m "New branch $branch" || return 1
+      git commit -m "New file $filename" || return 1
 
       git checkout $currentBranch
     done
@@ -150,7 +159,7 @@ if [ -f /workspaces/github/README.md ]; then
       echo $branch "`date '+ %F  %H:%M:%S'`" >> $filename
       git add $filename
 
-      git commit -m "Update branch $branch"
+      git commit -m "Update file $filename" || return 1
     done
 
     git checkout $currentBranch
