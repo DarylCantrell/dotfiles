@@ -62,12 +62,10 @@ alias graph='git log -10 --all --decorate --oneline --graph'
 # git log -2 --decorate --format='%C(yellow)Commit: %H %C(auto)%d%nParent: %p%nAuthor: %aN <%aE>%nCommtr: %cN <%cE> %C(red)%cd%n%n%s%n'
 
 alias log='echo "██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██   ██"; git log --decorate --format="%C(yellow)Commit: %H %C(auto)%d%nParent: %p%nCommtr: %cN <%cE> %C(red)%cd%n%n%s%n"'
-alias log1='log -1'
-alias log2='log -2'
-alias log3='log -3'
-alias log4='log -4'
-alias log5='log -5'
-alias log9='log -9'
+
+alias log1='log -1'; alias log2='log -2'; alias log3='log -3'
+alias log4='log -4'; alias log5='log -5'; alias log6='log -6'
+alias log7='log -7'; alias log8='log -8'; alias log9='log -9'
 
 alias logsig='log --show-signature'
 
