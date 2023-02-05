@@ -41,6 +41,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias stat='git status'
 
+alias amend='git commit --amend'
 alias fixup='git commit --amend --no-edit'
 
 alias staged='diff --staged'
