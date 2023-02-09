@@ -57,7 +57,7 @@ if [ -f /workspaces/github/README.md ]; then
 	# Add and verify dev server's GPG key, used by server to sign web edits, merges, etc.
 	if [ -f ~/dotfiles/devKeys/devServerKey.gpg.pub ]; then
 		gpg2 --import ~/dotfiles/devKeys/devServerKey.gpg.pub
-		echo 'y' | gpg2 --command-fd 0 --sign-key 08A088ACEF151AF6
+		echo 'y' | gpg2 --command-fd 0 --sign-key --local-user AD3B4A12FAD9D319 08A088ACEF151AF6
 	fi
 
 	cat >> /etc/hosts <<-EOF
