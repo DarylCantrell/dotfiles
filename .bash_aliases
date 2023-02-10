@@ -98,6 +98,7 @@ if [ -f /workspaces/github/README.md ]; then
   alias sql=/workspaces/github/bin/dbconsole
 
   alias gitauth='overmind c gitauth'
+  alias resqued='overmind c resqued'
 
   alias irb=/workspaces/github/bin/irb
 
