@@ -55,9 +55,11 @@ alias show0='git show -w -U0'
 alias sns='git show --pretty="%C(yellow)commit %H%n%C(white)tree %t%n%C(brightred)parents %p" --name-status'
 alias dns='git diff --name-status'
 
-alias 1ln='git log -15 --oneline --first-parent'
 alias logid='git log --pretty="%C(yellow)%h %C(green)%<(12,trunc)%al %C(white)tree %t %C(brightred)parents %<(26,trunc)%p %C(white)%<(62,trunc)%s"'
 alias graph='git log -10 --all --decorate --oneline --graph'
+
+alias 1ln='git log --oneline --first-parent'
+alias 1ln1='1ln -10'; alias 1ln2='1ln -20'; alias 1ln3='1ln -30'
 
 # git log -2 --decorate --format='%C(yellow)commit %H%n%p%nAuthor: %aN <%aE>%nCommit: %cN <%cE> %C(red)%cd%n'
 # git log -2 --decorate --format='%C(yellow)Commit: %H %C(auto)%d%nParent: %p%nAuthor: %aN <%aE>%nCommtr: %cN <%cE> %C(red)%cd%n%n%s%n'
