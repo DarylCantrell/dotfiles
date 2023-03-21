@@ -44,6 +44,8 @@ alias stat='git status'
 alias amend='git commit --amend'
 alias fixup='git commit --amend --no-edit'
 
+alias force='git branch -f'
+
 alias staged='diff --staged'
 alias unstage='git restore --staged'
 
