@@ -1,5 +1,5 @@
 select
-  concat('pr.id: ', pr.id, '  [pr.num: ', iss.number, ']  (', cast(pr.head_ref as char(300)), ' → ', cast(pr.base_ref as char(300)), ')') as pr_id,
+  concat('pr.id: ', pr.id, '  [pr.num: ', iss.number, ']  (', cast(pr.head_ref as nchar(300)), ' → ', cast(pr.base_ref as nchar(300)), ')') as pr_id,
   left(pr.base_sha, 8) as pr_base_sha,
   left(pr.head_sha, 8) as pr_head_sha,
   pr.mergeable as pr_mergeable,
@@ -15,7 +15,7 @@ where
 
 
 select
-  concat(pr.id, "  (", pr.head_ref, " → ", pr.base_ref, ")") as pr_id,
+  concat(pr.id, "  (", cast(pr.head_ref as nchar(300)), " → ", cast(pr.base_ref as nchar(300)), ")") as pr_id,
   left(pr.base_sha, 8) as pr_base_sha,
   left(pr.head_sha, 8) as pr_head_sha,
   pr.mergeable as pr_mergeable,
