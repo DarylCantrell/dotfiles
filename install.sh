@@ -19,6 +19,12 @@ test -f ~/dotfiles/.dircolors &&
 # Stuff to do only on github/github
 if [ -f /workspaces/github/README.md ]; then
 
+	git config --file /workspaces/github/.git/config --unset-all remote.origin.fetch
+	git config --file /workspaces/github/.git/config remote.origin.fetch \
+	  "+refs/heads/master:refs/remotes/origin/master"
+	# git config --file /workspaces/github/.git/config --add remote.origin.fetch \
+	#   "+refs/heads/darylcantrell/*:refs/remotes/origin/darylcantrell/*"
+
 	# Speed up global search in VS Code by ignoring some files which are not ignored by git
 	if [ -f ~/dotfiles/.rgignore ]; then
 	  cp ~/dotfiles/.rgignore /workspaces/github
