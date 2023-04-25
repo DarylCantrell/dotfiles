@@ -4,3 +4,4 @@ bin/toggle-feature-flag enable repo_org_rules
 bin/toggle-feature-flag enable last_pusher_policy
 bin/toggle-feature-flag enable pull_request_review_merge_base_sha
 bin/toggle-feature-flag enable pull_request_strict_review_policy
+bin/toggle-feature-flag enable pull_request_promote_reviews_on_head_updated
