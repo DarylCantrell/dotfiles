@@ -26,6 +26,8 @@ select
   rvw.user_id as rvw_user_id,
   left(rvw.head_sha, 8) as rvw_head_sha,
   left(rvw.merge_base_sha, 8) as rvw_merge_base_sha,
+  rvw.created_at as rvw_created,
+  rvw.updated_at as rvw_updated,
   case rvw.state
     when 0 then '0:pending'     when 1 then '1:commented'    when 30 then '30:changes_requested'
     when 40 then '40:approved'  when 50 then '50:dismissed'  else rvw.state
