@@ -5,3 +5,5 @@ bin/toggle-feature-flag enable last_pusher_policy
 bin/toggle-feature-flag enable pull_request_review_merge_base_sha
 bin/toggle-feature-flag enable pull_request_strict_review_policy
 bin/toggle-feature-flag enable pull_request_promote_reviews_on_head_updated
+bin/toggle-feature-flag enable pull_request_dismiss_stale_approvals
+bin/toggle-feature-flag enable pull_request_always_promote_all_approvals
