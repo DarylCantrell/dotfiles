@@ -1,4 +1,3 @@
-bin/toggle-feature-flag enable edit_repo_protections_fine_grained_perm
 bin/toggle-feature-flag enable push_policies
 bin/toggle-feature-flag enable repo_org_rules
 bin/toggle-feature-flag enable last_pusher_policy
@@ -7,3 +6,5 @@ bin/toggle-feature-flag enable pull_request_strict_review_policy
 bin/toggle-feature-flag enable pull_request_promote_reviews_on_head_updated
 bin/toggle-feature-flag enable pull_request_dismiss_stale_approvals
 bin/toggle-feature-flag enable pull_request_always_promote_all_approvals
+bin/toggle-feature-flag enable combine_bypass_boxes
+bin/toggle-feature-flag enable ruleset_bypass_modes
