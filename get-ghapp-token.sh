@@ -1,5 +1,14 @@
 #! /bin/bash
 
+# How to use this:
+#
+# - Go to organization Settings > Developer Settings > GitHub Apps.
+# - Create a new github app and give it some useful permissions.
+# - On the new app page, note the 'App ID'. Also generate and download a private key.
+# - Copy paste contents of the private key into a file, for example: /tmp/my-app.pem
+# - On the 'Install App' tab, pick an account and install app on a repo, or every repo.
+# - This takes you to the new installation page. Look in URL for installation id.
+
 if [ $# -lt 3 -o $# -gt 4 ] ; then
   echo "Usage: $(basename $BASH_SOURCE) <private-key-file> <app-id> <installation-id> [<server-api-url>]"
   exit 1
