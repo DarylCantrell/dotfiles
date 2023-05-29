@@ -37,6 +37,32 @@ curl -u $collab_pat \
   https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
 
 
+# List branches
+curl -u :ghs_ggxgK9JlqFS1AH6ROOsq603g4HiCwy45BoGh \
+ --request GET \
+ --header "Content-Type: application/json" \
+ --header "Accept: application/vnd.github+json" \
+http://api.github.localhost/repos/github/public-server/branches
+
+
+# Rename branch
+curl -u :ghs_ggxgK9JlqFS1AH6ROOsq603g4HiCwy45BoGh \
+ --request POST \
+ --header "Content-Type: application/json" \
+ --header "Accept: application/vnd.github+json" \
+ --data '{"new_name":"topic8"}' \
+http://api.github.localhost/repos/github/public-server/branches/topic7/rename
+
+
+getbp() {
+  curl -i \
+  --request GET \
+  --header "Authorization: token $2" \
+  --header "Accept: application/vnd.github+json" \
+  http://api.github.localhost/repos/github/public-server/branches/$1/protection
+}
+
+
 ## Github-App
 ## ==========
 
