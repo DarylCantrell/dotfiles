@@ -7,9 +7,9 @@ pushd /workspaces
 
 # Clone public-server as monalisa
 
-rm -rf /workspaces/public-server
-mkdir /workspaces/public-server
-cd /workspaces/public-server
+rm -rf /workspaces/mona-public-server
+mkdir /workspaces/mona-public-server
+cd /workspaces/mona-public-server
 
 GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/monalisa.rsa)" \
 	git clone ssh://git@localhost:3035/github/public-server.git .

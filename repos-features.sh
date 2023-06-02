@@ -8,3 +8,4 @@ bin/toggle-feature-flag enable pull_request_dismiss_stale_approvals
 bin/toggle-feature-flag enable pull_request_always_promote_all_approvals
 bin/toggle-feature-flag enable combine_bypass_boxes
 bin/toggle-feature-flag enable ruleset_bypass_modes
+bin/toggle-feature-flag enable actor_bypass_mode_column

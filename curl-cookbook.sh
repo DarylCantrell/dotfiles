@@ -23,7 +23,7 @@ pr_getmerge() {
 
 # Post status to commit
 # error, failure, pending, success
-collab_pat='ghe-admin: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'
+collab_pat='darylcantrell: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'
 curl -u $collab_pat \
  --request POST \
  --header "Content-Type: application/json" \
@@ -31,10 +31,11 @@ curl -u $collab_pat \
  --data '{
   "state":"success",
   "target_url":"https://example.com/build/status",
-  "description":"PAT status baz",
-  "context":"baz"
+  "description":"PAT status foo",
+  "context":"foo"
   }' \
-  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
+  https://api.github.com/repos/darylc-test-1/test-1/statuses/f6cf56aaa4e10f9f9fa2db4e988149d972941025
+#  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/Org1/Repo1/statuses/fc3bf2ecc69c65024c610fe0633753ffd47fbcc9
 
 
 # List branches
