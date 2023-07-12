@@ -7,8 +7,8 @@ select
   pr.merge_commit_sha,
   pr.base_sha_on_merge as pr_base_sha_on_merge,
   iss.state as iss_state
-from github_development_issues_pull_requests.pull_requests pr
-join github_development_issues_pull_requests.issues iss
+from pull_requests pr
+join issues iss
   on pr.id = iss.pull_request_id
 where
   true\G
@@ -32,8 +32,8 @@ select
     when 0 then '0:pending'     when 1 then '1:commented'    when 30 then '30:changes_requested'
     when 40 then '40:approved'  when 50 then '50:dismissed'  else rvw.state
   end as rvw_state
-from github_development_issues_pull_requests.pull_requests pr
-left outer join github_development_issues_pull_requests.pull_request_reviews rvw
+from pull_requests pr
+left outer join pull_request_reviews rvw
   on pr.id = rvw.pull_request_id
 where
   true\G

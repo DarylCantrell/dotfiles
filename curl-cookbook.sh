@@ -1,3 +1,75 @@
+create_pull_request() {
+  base_url=$1; shift
+  auth_token=$1; shift
+  source_branch=$1; shift
+  target_branch=$1; shift
+
+  if [ -z "$target_branch" ]; then
+    echo "Usage: $0 <base_url> <auth_token> <source_branch> <target_branch>"
+    echo "<base_url> samples:"
+    echo '  http://api.github.localhost/repos/{owner}/{repo}'
+    echo '  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/{owner}/{repo}'
+    return 1
+  fi
+
+  curl \
+    --request POST -i \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/vnd.github+json" \
+    --header "Authorization: token $auth_token" \
+    --data '{
+      "title":"PR '$source_branch' -> '$target_branch'",
+      "body":"A pull request",
+      "base":"'$target_branch'",
+      "head":"'$source_branch'"
+    }' \
+    $base_url"/pulls"
+}
+
+close_pull_request() {
+  base_url=$1; shift
+  auth_token=$1; shift
+  pr_number=$1; shift
+
+  if [ -z "$pr_number" ]; then
+    echo "Usage: $0 <base_url> <auth_token> <pr_number>"
+    echo "<base_url> samples:"
+    echo '  http://api.github.localhost/repos/{owner}/{repo}'
+    echo '  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/{owner}/{repo}'
+    return 1
+  fi
+
+  curl \
+    --request PATCH -i \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/vnd.github+json" \
+    --header "Authorization: token $auth_token" \
+    --data '{ "state":"closed" }' \
+    $base_url"/pulls/"$pr_number
+}
+
+approve_pull_request() {
+  base_url=$1; shift
+  auth_token=$1; shift
+  pr_number=$1; shift
+
+  if [ -z "$pr_number" ]; then
+    echo "Usage: $0 <base_url> <auth_token> <pr_number>"
+    echo "<base_url> samples:"
+    echo '  http://api.github.localhost/repos/{owner}/{repo}'
+    echo '  https://api.darylcantrell-03d56231eb10a1a11.ghe-test.org/repos/{owner}/{repo}'
+    return 1
+  fi
+
+  curl \
+    --request POST -i \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/vnd.github+json" \
+    --header "Authorization: token $auth_token" \
+    --data '{ "event":"APPROVE" }' \
+    $base_url"/pulls/"$pr_number"/reviews"
+}
+
 exit
 
 collab_pat='collaborator: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'
