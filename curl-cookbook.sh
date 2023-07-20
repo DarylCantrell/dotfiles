@@ -81,7 +81,7 @@ pr_merge() {
     return 1
   fi
 
-  echo \
+  curl \
     --request PUT -i \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
