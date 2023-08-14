@@ -3,8 +3,9 @@ select
   left(pr.base_sha, 8) as pr_base_sha,
   left(pr.head_sha, 8) as pr_head_sha,
   pr.mergeable as pr_mergeable,
-  -- left(pr.merge_commit_sha, 8) as pr_merge_commit_sha,
-  pr.merge_commit_sha,
+  pr.merged_at as pr_merged_at,
+  left(pr.merge_commit_sha, 8) as pr_merge_commit_sha,
+  -- pr.merge_commit_sha,
   pr.base_sha_on_merge as pr_base_sha_on_merge,
   iss.state as iss_state
 from pull_requests pr

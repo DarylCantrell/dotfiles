@@ -61,3 +61,23 @@ ref_force() {
     --data '{ "sha": "'$sha'", "force": true }' \
     $base_url"/git/refs/heads/"$branch_name
 }
+
+ref_create() {
+  base_url=$1; shift
+  auth_token=$1; shift
+  branch_name=${1#"refs/heads/"}; shift
+  sha=$1; shift
+
+  if [ -z "$sha" ]; then
+    usage_error "Usage: ref_force <base_url> <auth_token> <branch_name> <commit_sha>"
+    return 1
+  fi
+
+  curl \
+    --request POST -i \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/vnd.github+json" \
+    --header "Authorization: token $auth_token" \
+    --data '{ "sha": "'$sha'", "ref": "'refs/heads/$branch_name'" }' \
+    $base_url"/git/refs"
+}
