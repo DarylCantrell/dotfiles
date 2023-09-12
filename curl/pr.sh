@@ -7,10 +7,10 @@ usage_error() {
 }
 
 pr_create() {
-  base_url=$1; shift
-  auth_token=$1; shift
-  source_branch=$1; shift
-  target_branch=$1; shift
+  local base_url=$1; shift
+  local auth_token=$1; shift
+  local source_branch=$1; shift
+  local target_branch=$1; shift
 
   if [ -z "$target_branch" ]; then
     usage_error "Usage: pr_create <base_url> <auth_token> <source_branch> <target_branch>"
