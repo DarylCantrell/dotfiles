@@ -68,3 +68,26 @@ triplet() {
   pr_b_id=`sed '/\r$/d' <<< "$pr_b" | jq -r .id`
   pr_approve $url `cat /workspaces/collab.pat` $pr_b_id
 }
+
+queue3merge() {
+  n=$1; shift;
+    if [ -z "$n" ]; then
+    return 1
+  fi
+  local url=http://api.github.localhost/repos/github/public-server
+  local mona_pat=`cat /workspaces/mona.pat`
+
+  git checkout main
+  git pull
+
+  newbranch topic$n"a" topic$n"b" topic$n"c"
+  pushtouchbranch topic$n"a" topic$n"b" topic$n"c"
+
+  local pr_a=`pr_create $url $mona_pat topic$n"a" main`
+  local pr_b=`pr_create $url $mona_pat topic$n"b" main`
+  local pr_c=`pr_create $url $mona_pat topic$n"c" main`
+
+  local pr_a_id=`sed '/\r$/d' <<< "$pr_a" | jq -r .id`
+  local pr_b_id=`sed '/\r$/d' <<< "$pr_b" | jq -r .id`
+  local pr_c_id=`sed '/\r$/d' <<< "$pr_c" | jq -r .id`
+}
