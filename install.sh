@@ -33,6 +33,7 @@ if [ -f /workspaces/github/README.md ]; then
 
 	# Some programs ignore secret key files if they have default 644 permissions
 	chmod -f 600 ~/dotfiles/devKeys/*.rsa
+	chmod -f 600 ~/dotfiles/devKeys/*.ed25519
 	chmod -f 600 ~/dotfiles/devKeys/*.gpg.sec
 
 	# Git doesn't seem to like the default GPG
