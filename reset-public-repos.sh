@@ -27,6 +27,11 @@ clone_repo() {
   git config --local user.signingkey "$(realpath ~/dotfiles/devKeys/${login}.ed25519)"
   git config --local --add gpg.ssh.allowedSignersFile "$(realpath ~/dotfiles/devKeys/allowed_signers)"
   git config --local commit.gpgsign true
+
+  git config --local --add ghapi.url http://api.github.localhost/repos/github/public-server
+  if [ -f /workspaces/pat.$name ]; then
+    git config --local --add ghapi.token `cat /workspaces/pat.$name`
+  fi
 }
 
 pushd /workspaces

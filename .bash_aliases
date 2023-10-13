@@ -139,7 +139,7 @@ if [ -f /workspaces/github/README.md ]; then
   }
 
   pushnewbranch() {
-    newbranch $*
+    newbranch $* || return 1
 
     git push --set-upstream origin $*
   }
@@ -176,7 +176,7 @@ if [ -f /workspaces/github/README.md ]; then
       shift
     fi
 
-    touchbranch $*
+    touchbranch $* || return 1
 
     git push $force origin $*
   }
