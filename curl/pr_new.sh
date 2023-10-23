@@ -43,7 +43,7 @@ pr_create() {
 }
 
 pr_create_multi() {
-  local usage = "Usage: pr_create_multi <source_branch> <count> [<target_branch>]"
+  local usage="Usage: pr_create_multi <source_branch> <count> [<target_branch>]"
   local source_branch=$1; shift
   [ -z "$source_branch" ] && echo $usage && return 1
   local count=$1; shift
@@ -76,7 +76,7 @@ pr_approve() {
 }
 
 pr_approve_multi() {
-  local usage = "Usage: pr_approve_multi <count> <pr_number>"
+  local usage="Usage: pr_approve_multi <count> <pr_number>"
   local count=$1; shift
   [ -z "$count" ] && echo $usage && return 1
   local pr_number=$1; shift
