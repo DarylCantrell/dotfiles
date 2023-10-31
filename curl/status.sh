@@ -8,6 +8,9 @@ status_post() {
   [ -z "$context" ] && echo "Usage: status_approve <context> <commit_id> <state>" && return 1
   local commit_id=$1; shift
   [ -z "$commit_id" ] && echo "Usage: status_approve <context> <commit_id> <state>" && return 1
+  if [ ${#commit_id} -lt 40 ]; then
+    commit_id=`git rev-parse $commit_id`
+  fi
   local state=$1; shift
   [ -z "$state" ] && echo "Usage: status_approve <context> <commit_id> <state>" && return 1
 
