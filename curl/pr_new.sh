@@ -51,7 +51,7 @@ pr_create_multi() {
 
   local target_branch=$1; shift
 
-  for ((i=$count; i>=1; i--)); do
+  for ((i=1; i<=$count; i++)); do
     pr_create $source_branch"-"$i $target_branch
   done
 }
