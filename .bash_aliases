@@ -19,17 +19,17 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias up='cd ..'
-alias up1='cd ..'
-alias up2='cd ../..'
-alias up3='cd ../../..'
-alias up4='cd ../../../..'
-alias up5='cd ../../../../..'
-alias up6='cd ../../../../../..'
+alias up='cd ..'; alias up1='cd ..'; alias up2='cd ../..'; alias up3='cd ../../..'
+alias up4='cd ../../../..'; alias up5='cd ../../../../..'; alias up6='cd ../../../../../..'
 
-alias d='dirs'
-alias pd='pushd'
-alias pp='popd'
+alias p='dirs -v'
+pd() {
+  [ -z "$1" ] && echo >&2 "Usage: pd <directory>" && return 1
+  pushd "$1" >/dev/null
+  dirs -v
+}
+alias pp='popd >/dev/null; dirs -v'
+alias r='pd +1'; alias r1='pd +1'; alias r2='pd +2'; alias r3='pd +3'; alias r4='pd +4'; alias r5='pd +5'
 
 alias csname='echo $CODESPACE_NAME'
 
