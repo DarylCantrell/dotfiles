@@ -37,6 +37,7 @@ clone_repo() {
 create_pat_file() {
   local login=$1; shift
   local name=$1; shift
+  local site_admin=$1; shift
 
   if [ ! -f /workspaces/pat.$name ]; then
     ./bin/rails console <<EOF | grep -Eo 'ghp_[^"]+' > /workspaces/pat.$name
@@ -44,7 +45,7 @@ create_pat_file() {
 
     normalized_scopes = ['admin:enterprise', 'admin:gpg_key', 'admin:org', 'admin:org_hook', 'admin:public_key', 'admin:repo_hook',
       'admin:ssh_signing_key', 'audit_log', 'codespace', 'copilot', 'delete:packages', 'delete_repo', 'gist', 'notifications',
-      'project', 'repo', 'site_admin', 'user', 'workflow', 'write:discussion', 'write:packages']
+      'project', 'repo', 'user', 'workflow', 'write:discussion', 'write:packages'${site_admin}]
 
     access = current_user.oauth_accesses.build do |a|
       a.application_id = OauthApplication::PERSONAL_TOKENS_APPLICATION_ID
@@ -64,8 +65,9 @@ EOF
 
 pushd /workspaces/github
 
-create_pat_file monalisa     mona
-create_pat_file collaborator collab
+create_pat_file monalisa     mona   ", 'site_admin'"
+create_pat_file collaborator collab ""
+create_pat_file outsider outsider   ""
 
 clone_repo monalisa     mona     octocat
 clone_repo collaborator collab   collaborator
