@@ -94,7 +94,7 @@ pr_merge() {
   [ -z "$auth_token" ] && echo "Error: ghapi.token not set" && return 1
 
   pr_number=$1; shift
-  [ -z "$pr_number" ] && echo "Usage: pr_approve <pr_number> [merge|rebase|squash]" && return 1
+  [ -z "$pr_number" ] && echo "Usage: pr_merge <pr_number> [merge|rebase|squash]" && return 1
   merge_method=$1; shift
 
   local curl_output=
