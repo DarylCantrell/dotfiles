@@ -12,7 +12,7 @@ clone_repo() {
   mkdir /workspaces/${name}-public-server
   cd /workspaces/${name}-public-server
 
-  GIT_SSH_COMMAND="ssh -i $(realpath ~/dotfiles/devKeys/${login}.ed25519)" \
+  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i $(realpath ~/dotfiles/devKeys/${login}.ed25519)" \
     git clone ssh://git@localhost:3035/github/public-server.git .
 
   git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/${login}.ed25519)"
@@ -62,6 +62,8 @@ create_pat_file() {
 EOF
   fi
 }
+
+ssh-keygen -f ~/.ssh/known_hosts -R "[localhost]:3035"
 
 pushd /workspaces/github
 

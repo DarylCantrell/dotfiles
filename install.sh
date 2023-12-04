@@ -66,9 +66,10 @@ if [ -f /workspaces/github/README.md ]; then
   fi
 
   # Add dev server's SSH key to known hosts
-  if [ \! -f ~/.ssh/known_hosts ]; then
-    echo >> ~/.ssh/known_hosts '|1|Xe11EuW9c8eB6y7z+aY86v8M+Iw=|GVy5Jejcih/Wq+QJW/EPN/MHbWw= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSzhHAZZiodxcTA6G6Satu+KIfatmx0ABMyKKcVmPatsPnT30IMDs0QQuufMGuZ1mwuz1Ziy+NWD/rUk2f3c8l9LRxXVTcwUBfXLEBQpLDbeFSN/tp6VrSs0AnfCZMBiI+V9Uak6sh5FN9hsADDMZz8JcXLdxfxgqBU6Ib+VzrBK/aSIoSaKLZM8FQI+z2TR/64sDYM7uHdbzz9y2PEOyz/LUcnKAkM/ye8S1omXpMcCnJIOC2DZMWp0z6WiEOgQewYokwi3f5rv3EYP4YpV7ks1C8fLRMk2a1ixwrCNWwqqWYQadwbfyomVCWGJlwOFY7PLpCHtg+yzSp3FAaaGtH4QTrvT/zKQ8msneDM/fVqqOq9ot8DPZWYLtV+nBDnS5TE4FODZopx5+5RPA7dDuvlCtqOcOhF1b3W8t1rhzMmTj3qCC6r/e9G9lClog5lEWDsGBn4hJBeax61XHmZQl/lu4gdnhQw3RHB9oQlxD6QPOtBaJKdgZSaWgn16l3z/0='
-  fi
+  # This doesn't seem to work anymore. Add this key from reset-public-repos instead
+  # if [ \! -f ~/.ssh/known_hosts ]; then
+  #   echo >> ~/.ssh/known_hosts '|1|Xe11EuW9c8eB6y7z+aY86v8M+Iw=|GVy5Jejcih/Wq+QJW/EPN/MHbWw= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSzhHAZZiodxcTA6G6Satu+KIfatmx0ABMyKKcVmPatsPnT30IMDs0QQuufMGuZ1mwuz1Ziy+NWD/rUk2f3c8l9LRxXVTcwUBfXLEBQpLDbeFSN/tp6VrSs0AnfCZMBiI+V9Uak6sh5FN9hsADDMZz8JcXLdxfxgqBU6Ib+VzrBK/aSIoSaKLZM8FQI+z2TR/64sDYM7uHdbzz9y2PEOyz/LUcnKAkM/ye8S1omXpMcCnJIOC2DZMWp0z6WiEOgQewYokwi3f5rv3EYP4YpV7ks1C8fLRMk2a1ixwrCNWwqqWYQadwbfyomVCWGJlwOFY7PLpCHtg+yzSp3FAaaGtH4QTrvT/zKQ8msneDM/fVqqOq9ot8DPZWYLtV+nBDnS5TE4FODZopx5+5RPA7dDuvlCtqOcOhF1b3W8t1rhzMmTj3qCC6r/e9G9lClog5lEWDsGBn4hJBeax61XHmZQl/lu4gdnhQw3RHB9oQlxD6QPOtBaJKdgZSaWgn16l3z/0='
+  # fi
 
   cat >> /etc/hosts <<EOF
     127.0.0.1  github.localhost
