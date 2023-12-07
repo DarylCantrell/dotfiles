@@ -39,6 +39,7 @@ pr_create() {
   else
     echo -e '\nNew PR:'
     jq -r .html_url <<< "$curl_output"
+    jq -r .id <<< "$curl_output"
   fi
 }
 
