@@ -43,6 +43,9 @@ create_pat_file() {
     ./bin/rails console <<EOF | grep -Eo 'ghp_[^"]+' > /workspaces/pat.$name
     current_user=User.find_by_login('${login}')
 
+    pat1 = current_user.oauth_accesses.find_by_description('pat1')
+    pat1&.delete
+
     normalized_scopes = ['admin:enterprise', 'admin:gpg_key', 'admin:org', 'admin:org_hook', 'admin:public_key', 'admin:repo_hook',
       'admin:ssh_signing_key', 'audit_log', 'codespace', 'copilot', 'delete:packages', 'delete_repo', 'gist', 'notifications',
       'project', 'repo', 'user', 'workflow', 'write:discussion', 'write:packages'${site_admin}]
