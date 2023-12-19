@@ -1,11 +1,10 @@
-bin/toggle-feature-flag enable push_policies
+bin/toggle-feature-flag enable merge_queue_insights
+bin/toggle-feature-flag enable push_rule_insight_details
+
+bin/toggle-feature-flag enable push_rulesets
 bin/toggle-feature-flag enable repo_org_rules
-bin/toggle-feature-flag enable last_pusher_policy
-bin/toggle-feature-flag enable pull_request_review_merge_base_sha
-bin/toggle-feature-flag enable pull_request_strict_review_policy
-bin/toggle-feature-flag enable pull_request_promote_reviews_on_head_updated
-bin/toggle-feature-flag enable pull_request_dismiss_stale_approvals
-bin/toggle-feature-flag enable pull_request_always_promote_all_approvals
-bin/toggle-feature-flag enable combine_bypass_boxes
-bin/toggle-feature-flag enable ruleset_bypass_modes
-bin/toggle-feature-flag enable actor_bypass_mode_column
+bin/toggle-feature-flag enable file_extension_restriction_rule
+bin/toggle-feature-flag enable file_path_restriction_rule
+bin/toggle-feature-flag enable new_restricted_commits_rule
+bin/toggle-feature-flag enable max_file_path_length_rule
+bin/toggle-feature-flag enable max_file_size_rule
