@@ -8,12 +8,12 @@ clone_repo() {
   local name=$1; shift
   local email=$1; shift
 
-  rm -rf /workspaces/${name}-public-server
-  mkdir /workspaces/${name}-public-server
-  cd /workspaces/${name}-public-server
+  rm -rf /workspaces/${name}-${which_repo}-server
+  mkdir /workspaces/${name}-${which_repo}-server
+  cd /workspaces/${name}-${which_repo}-server
 
   GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i $(realpath ~/dotfiles/devKeys/${login}.ed25519)" \
-    git clone ssh://git@localhost:3035/github/public-server.git .
+    git clone ssh://git@localhost:3035/github/${which_repo}-server.git .
 
   git config --local --add core.sshcommand "ssh -i $(realpath ~/dotfiles/devKeys/${login}.ed25519)"
 
@@ -28,7 +28,7 @@ clone_repo() {
   git config --local --add gpg.ssh.allowedSignersFile "$(realpath ~/dotfiles/devKeys/allowed_signers)"
   git config --local commit.gpgsign true
 
-  git config --local --add ghapi.url http://api.github.localhost/repos/github/public-server
+  git config --local --add ghapi.url http://api.github.localhost/repos/github/${which_repo}-server
   if [ -f /workspaces/pat.$name ]; then
     git config --local --add ghapi.token `cat /workspaces/pat.$name`
   fi
@@ -65,6 +65,8 @@ create_pat_file() {
 EOF
   fi
 }
+
+which_repo=${1:-public}
 
 ssh-keygen -f ~/.ssh/known_hosts -R "[localhost]:3035"
 
