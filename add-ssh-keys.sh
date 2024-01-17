@@ -35,15 +35,6 @@ mysql -D github_development << EOF
 		created_at, updated_at, verified_at
 	) VALUES (
 		@mona_id, @mona_id, @mona_id,
-		'${monaRsaKey}',
-		'${monaRsaFingerprint}',
-		'monalisa.rsa',
-		'git',
-		'user',
-		0,
-		now(), now(), now()
-	),(
-		@mona_id, @mona_id, @mona_id,
 		'${monaEdKey}',
 		'${monaEdFingerprint}',
 		'monalisa.ed25519',
@@ -53,27 +44,9 @@ mysql -D github_development << EOF
 		now(), now(), now()
 	),(
 		@collab_id, @collab_id, @collab_id,
-		'${collabRsaKey}',
-		'${collabRsaFingerprint}',
-		'collaborator.rsa',
-		'git',
-		'user',
-		0,
-		now(), now(), now()
-	),(
-		@collab_id, @collab_id, @collab_id,
 		'${collabEdKey}',
 		'${collabEdFingerprint}',
 		'collaborator.ed25519',
-		'git',
-		'user',
-		0,
-		now(), now(), now()
-	),(
-		@outsider_id, @outsider_id, @outsider_id,
-		'${outsiderRsaKey}',
-		'${outsiderRsaFingerprint}',
-		'outsider.rsa',
 		'git',
 		'user',
 		0,
