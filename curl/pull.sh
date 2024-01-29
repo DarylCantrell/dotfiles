@@ -16,9 +16,10 @@ pr_create() {
   fi
 
   local curl_output=
+  # Add --fail-with-body when they update curl
   curl_output=`curl \
     --request POST \
-    -s --fail-with-body \
+    --silent \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
     --header "Authorization: token $auth_token" \
@@ -66,9 +67,10 @@ pr_approve() {
   local pr_number=$1; shift
   [ -z "$pr_number" ] && echo "Usage: pr_approve <pr_number>" && return 1
 
+  # Add --fail-with-body when they update curl
   curl \
     --request POST \
-    -s --fail-with-body \
+    --silent \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
     --header "Authorization: token $auth_token" \
@@ -98,9 +100,10 @@ pr_merge() {
   [ -z "$pr_number" ] && echo "Usage: pr_merge <pr_number> [merge|rebase|squash]" && return 1
   merge_method=$1; shift
 
+  # Add --fail-with-body when they update curl
   local curl_output=
   curl_output=`curl \
-    -s --fail-with-body \
+    --silent \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
     --header "Authorization: token $auth_token" \
@@ -117,9 +120,10 @@ pr_merge() {
     head_sha=`jq -r .head.sha <<< "$curl_output"`
   fi
 
+  # Add --fail-with-body when they update curl
   curl \
     --request PUT \
-    -s --fail-with-body \
+    --silent \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
     --header "Authorization: token $auth_token" \
