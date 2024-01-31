@@ -51,7 +51,8 @@ signature=$(printf %s "$signedContent" | openssl dgst -sha256 -sign $privKeyFile
 
 jwt="${signedContent}.${signature}"
 
-curlOutput=$(curl -s --fail-with-body -X POST \
+# Add --fail-with-body when they update curl
+curlOutput=$(curl --silent -X POST \
   -H "Authorization: Bearer $jwt" \
   -H "Accept: application/vnd.github+json" \
   "$url/app/installations/$instId/access_tokens")

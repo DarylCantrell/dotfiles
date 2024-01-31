@@ -14,9 +14,10 @@ status_post() {
   local state=$1; shift
   [ -z "$state" ] && echo "Usage: status_approve <context> <commit_id> <state>" && return 1
 
+  # Add --fail-with-body after bug fixed
   curl \
     --request POST \
-    -s --fail-with-body \
+    --silent \
     --header "Content-Type: application/json" \
     --header "Accept: application/vnd.github+json" \
     --header "Authorization: token $auth_token" \
