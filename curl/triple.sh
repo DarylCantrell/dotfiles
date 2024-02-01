@@ -3,7 +3,7 @@ triple() {
   local source_prefix=$1; shift
   [ -z "$source_prefix" ] && echo $usage && return 1
 
-  pushd /workspaces/mona-public-server
+  pushd /workspaces/mona-internal-server
 
   local pr_create_out=`pr_create ${source_prefix}-a`
   local res=$?
@@ -13,7 +13,7 @@ triple() {
   local pr_a_id=`sed -n '$p' <<< $pr_create_out`
   status_success foo ${source_prefix}-a
 
-  cd /workspaces/collab-public-server
+  cd /workspaces/collab-internal-server
 
   pr_approve $pr_a_id
 
@@ -25,7 +25,7 @@ triple() {
   local pr_b_id=`sed -n '$p' <<< $pr_create_out`
   status_success foo ${source_prefix}-b
 
-  cd /workspaces/outsider-public-server
+  cd /workspaces/outsider-internal-server
 
   pr_approve $pr_b_id
 
@@ -37,7 +37,7 @@ triple() {
   local pr_c_id=`sed -n '$p' <<< $pr_create_out`
   status_success foo ${source_prefix}-c
 
-  cd /workspaces/mona-public-server
+  cd /workspaces/mona-internal-server
 
   pr_approve $pr_c_id
 
@@ -45,6 +45,8 @@ triple() {
 }
 
 q_stat() {
-  sudo /usr/bin/mysql -B -D github_development_collab -e "select concat('status_success foo ', head_sha, ' # PR ', pull_request_id) as '' from merge_queue_entries"
+  ctx=${1:-"foo"}
+
+  sudo /usr/bin/mysql -B -D github_development_collab -e "select concat('status_success $ctx ', head_sha, '; ') as '' from merge_queue_entries"
   echo
 }
