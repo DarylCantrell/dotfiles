@@ -50,3 +50,10 @@ q_stat() {
   sudo /usr/bin/mysql -B -D github_development_collab -e "select concat('status_success $ctx ', head_sha, '; ') as '' from merge_queue_entries"
   echo
 }
+
+q_check() {
+  ctx=${1:-"foo"}
+
+  sudo /usr/bin/mysql -B -D github_development_collab -e "select concat('check_success $ctx ', head_sha, '; ') as '' from merge_queue_entries"
+  echo
+}
