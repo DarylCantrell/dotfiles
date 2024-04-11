@@ -106,6 +106,9 @@ if [ -f /workspaces/github/README.md ]; then
 
   alias irb=/workspaces/github/bin/irb
 
+  alias rtest='bin/rails test'
+  alias fftest='TEST_ALL_FEATURES=1 bin/rails test'
+
   server() {
     title "gh-server"
     sleep 7
