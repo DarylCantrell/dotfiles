@@ -92,7 +92,7 @@ fetchout() {
   git fetch origin "$@" && git checkout "$@"
 }
 
-### github/github
+### Specific to github/github codespaces
 
 if [ -f /workspaces/github/README.md ]; then
   alias monasign='git commit --gpg-sign=AD3B4A12FAD9D319'
@@ -108,6 +108,8 @@ if [ -f /workspaces/github/README.md ]; then
 
   alias rtest='bin/rails test'
   alias fftest='TEST_ALL_FEATURES=1 bin/rails test'
+
+  alias rubo='bin/safe-ruby script/git-hooks/rubocop_pre_push.rb'
 
   server() {
     title "gh-server"
