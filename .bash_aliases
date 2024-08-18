@@ -185,5 +185,34 @@ if [ -f /workspaces/github/README.md ]; then
 
     git push $force origin $*
   }
+
+  apiget() {
+    curl \
+      -X GET \
+      --header "Content-Type: application/json" \
+      --header "Accept: application/vnd.github+json" \
+      --header "Authorization: token `git config --local --get ghapi.token`" \
+      "`git config --local --get ghapi.url`/$1" $*
+  }
+
+  apipost() {
+    curl \
+      -X POST \
+      --header "Content-Type: application/json" \
+      --header "Accept: application/vnd.github+json" \
+      --header "Authorization: token `git config --local --get ghapi.token`" \
+      --data "$2" \
+      "`git config --local --get ghapi.url`/$1" $*
+  }
+
+  apiput() {
+    curl \
+      -X PUT \
+      --header "Content-Type: application/json" \
+      --header "Accept: application/vnd.github+json" \
+      --header "Authorization: token `git config --local --get ghapi.token`" \
+      --data "$2" \
+      "`git config --local --get ghapi.url`/$1" $*
+  }
 fi
 
