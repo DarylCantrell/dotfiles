@@ -5,5 +5,5 @@ bin/toggle-feature-flag enable new_restricted_commits_rule
 bin/toggle-feature-flag enable mergebox_react_partial
 bin/toggle-feature-flag enable read_from_mergebox_json_api
 bin/toggle-feature-flag enable status_checks_json
-bin/toggle-feature-flag enable rule_pr_required_reviewers_schema
+bin/toggle-feature-flag enable rule_pr_required_reviewers_filter_suggestions
 bin/toggle-feature-flag enable rule_pr_required_reviewers_enforce
