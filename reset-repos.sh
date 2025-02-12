@@ -3,6 +3,13 @@
 # This blows away your local changes (if any), and makes new clones of public-server for monalisa, collaborator, and outsider.
 # You will want to run `add_ssh_keys.sh` first.
 
+if [ ! -d /tmp/babeld ]; then
+  mkdir /tmp/babeld
+  cp /workspaces/github/vendor/babeld/ssh_host_key.dev* /tmp/babeld
+  echo "RESTART SERVER (missing SSH keys)"
+  exit
+fi
+
 clone_repo() {
   local login=$1; shift
   local name=$1; shift
