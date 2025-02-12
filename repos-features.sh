@@ -7,3 +7,4 @@ bin/toggle-feature-flag enable read_from_mergebox_json_api
 bin/toggle-feature-flag enable status_checks_json
 bin/toggle-feature-flag enable rule_pr_required_reviewers_filter_suggestions
 bin/toggle-feature-flag enable rule_pr_required_reviewers_enforce
+bin/toggle-feature-flag enable last_reviewable_push_use_new_algo
