@@ -112,6 +112,12 @@ if [ -f /workspaces/github/README.md ]; then
   alias rubo='bin/safe-ruby script/git-hooks/rubocop_pre_push.rb'
 
   server() {
+    if [ ! -d /tmp/babeld ]; then
+      mkdir /tmp/babeld
+      cp /workspaces/github/vendor/babeld/ssh_host_key.dev* /tmp/babeld
+      echo "COPIED SSH KEYS"
+    fi
+
     title "gh-server"
     sleep 7
     /workspaces/github/bin/server -d || true

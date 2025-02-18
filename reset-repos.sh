@@ -4,8 +4,6 @@
 # You will want to run `add_ssh_keys.sh` first.
 
 if [ ! -d /tmp/babeld ]; then
-  mkdir /tmp/babeld
-  cp /workspaces/github/vendor/babeld/ssh_host_key.dev* /tmp/babeld
   echo "RESTART SERVER (missing SSH keys)"
   exit
 fi
