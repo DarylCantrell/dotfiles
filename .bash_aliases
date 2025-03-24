@@ -74,6 +74,8 @@ alias log7='log -7'; alias log8='log -8'; alias log9='log -9'
 
 alias logsig='log --show-signature'
 
+alias reflog='git reflog -15'
+
 title() {
   local title="$*"
   if [ -z "$title" ]; then

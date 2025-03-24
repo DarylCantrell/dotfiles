@@ -14,3 +14,4 @@ bin/toggle-feature-flag enable repo_org_rules
 bin/toggle-feature-flag enable organization_policies
 bin/toggle-feature-flag enable push_ruleset_delegated_bypass
 bin/toggle-feature-flag enable updated_bypass_requests_ui
+bin/toggle-feature-flag enable rule_suite_save_before_instrument
