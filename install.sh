@@ -34,6 +34,15 @@ if [ -f /workspaces/github/README.md ]; then
   # Some programs ignore secret key files if they have default 644 permissions
   chmod -f 600 ~/dotfiles/devKeys/*.rsa ~/dotfiles/devKeys/*.ed25519 ~/dotfiles/devKeys/*.gpg.sec
 
+  # Set vendor/reposd VS Code instance to use a subtly different color scheme
+  echo .vscode/settings.json >> /workspaces/github/vendor/reposd/.git/info/exclude
+  tmp=$(mktemp)
+  jq \
+    '."workbench.colorTheme"="Kimbie Dark""' \
+    /workspaces/github/vendor/reposd/.vscode/settings.json \
+    > $tmp \
+    && mv -f $tmp /workspaces/github/vendor/reposd/.vscode/settings.json
+
   # Git doesn't seem to like the default GPG
   git config --global --add gpg.program gpg2
 
