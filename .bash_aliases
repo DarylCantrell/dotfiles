@@ -109,7 +109,9 @@ if [ -f /workspaces/github/README.md ]; then
   alias irb=/workspaces/github/bin/irb
 
   alias rtest='bin/rails test'
-  alias fftest='TEST_ALL_FEATURES=1 bin/rails test'
+  alias fftest='TEST_ALL_FEATURES=1 rtest'
+  alias gotest='TEST_GOTAUTH=1 USE_FM_LITE=1 rtest'
+  alias gofftest='TEST_GOTAUTH=1 USE_FM_LITE=1 fftest'
 
   alias rubo='bin/safe-ruby script/git-hooks/rubocop_pre_push.rb'
 
