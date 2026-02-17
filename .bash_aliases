@@ -85,13 +85,13 @@ title() {
   echo -e -n "\e]0;${title}\a"
 }
 
-fetchout() {
+fetch() {
   if [ -z "$@" ]; then
     echo "Usage: fetchout <branch>"
     return 1
   fi
 
-  git fetch origin "$@" && git checkout "$@"
+  git fetch origin "$@:$@"
 }
 
 ### Specific to github/github codespaces
