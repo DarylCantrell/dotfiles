@@ -1,5 +1,21 @@
 #! /bin/bash
 
+mkdir -p ~/.copilot/instructions
+ln -s -t ~/.copilot/instructions ~/dotfiles/.copilot/instructions/*
+
+mkdir -p ~/.copilot/skills
+ln -s -t ~/.copilot/skills ~/dotfiles/.copilot/skills/*
+
+# mkdir ~/.copilot/XYZ
+# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
+
+# mkdir ~/.copilot/XYZ
+# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
+
+# mkdir ~/.copilot/XYZ
+# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
+
+
 # Link from homedir to dotfiles repo
 test -d /workspaces/.codespaces/.persistedshare/dotfiles &&
   ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
