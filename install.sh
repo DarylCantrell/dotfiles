@@ -1,21 +1,5 @@
 #! /bin/bash
 
-mkdir -p ~/.copilot/instructions
-ln -s -t ~/.copilot/instructions ~/dotfiles/.copilot/instructions/*
-
-mkdir -p ~/.copilot/skills
-ln -s -t ~/.copilot/skills ~/dotfiles/.copilot/skills/*
-
-# mkdir ~/.copilot/XYZ
-# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
-
-# mkdir ~/.copilot/XYZ
-# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
-
-# mkdir ~/.copilot/XYZ
-# ln -s -t ~/.copilot/XYZ ~/dotfiles/.copilot/XYZ/*
-
-
 # Link from homedir to dotfiles repo
 test -d /workspaces/.codespaces/.persistedshare/dotfiles &&
   ln -s /workspaces/.codespaces/.persistedshare/dotfiles ~/dotfiles
@@ -27,6 +11,15 @@ test -f ~/dotfiles/.bashrc &&
 # .bash_aliases
 test -f ~/dotfiles/.bash_aliases &&
   echo -e '\nsource ~/dotfiles/.bash_aliases' >> ~/.bash_aliases
+
+# Copilot stuff
+mkdir -p ~/.copilot/instructions
+ln -s -t ~/.copilot/instructions ~/dotfiles/.copilot/instructions/*
+
+mkdir -p ~/.copilot/skills
+ln -s -t ~/.copilot/skills ~/dotfiles/.copilot/skills/*
+
+ln -s ~/dotfiles/.copilot/mcp-config.json ~/.copilot/mcp-config.json
 
 # .dircolors (overwrite)
 test -f ~/dotfiles/.dircolors &&
@@ -100,6 +93,10 @@ if [ -f /workspaces/github/README.md ]; then
     127.0.0.1  github.localhost
     127.0.0.1  api.github.localhost
 EOF
+
+  # Stuff copilot needs.. Maybe this should be github/* not just github/github
+  pip install uv
+  pip install azure-cli
 
   # credential.helper config in github dev container doesn't work with dotFiles repo
   test -f ~/dotfiles/.git/config &&

@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "fabric-rti-mcp": {
+      "type": "local",
+      "command": "uv",
+      "args": [
+        "tool",
+        "run",
+        "microsoft-fabric-rti-mcp==0.4.0"
+      ],
+      "env": {
+        "KUSTO_SERVICE_URI": "https://gh-analytics.eastus.kusto.windows.net",
+        "KUSTO_SERVICE_DEFAULT_DB": "snapshots",
+        "FABRIC_API_BASE_URL": "https://api.fabric.microsoft.com/v1"
+      },
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}
