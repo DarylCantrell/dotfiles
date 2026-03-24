@@ -76,7 +76,7 @@ alias logsig='log --show-signature'
 
 alias reflog='git reflog -15'
 
-alias azlogin='yes "" | az login --output none'
+alias azlogin='yes "" | az login --use-device-code --output none && az account show'
 
 title() {
   local title="$*"
