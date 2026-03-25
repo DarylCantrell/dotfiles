@@ -77,6 +77,10 @@ alias logsig='log --show-signature'
 alias reflog='git reflog -15'
 
 alias azlogin='yes "" | az login --use-device-code --output none && az account show'
+alias azreset='az logout; azlogin'
+
+alias ghlogin='gh auth login'
+alias ghreset='unset GITHUB_TOKEN; rm -f ~/.config/gh/hosts.yml; ghlogin'
 
 title() {
   local title="$*"
