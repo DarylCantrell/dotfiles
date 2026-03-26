@@ -13,6 +13,9 @@ test -f ~/dotfiles/.bash_aliases &&
   echo -e '\nsource ~/dotfiles/.bash_aliases' >> ~/.bash_aliases
 
 # Copilot stuff
+mkdir -p ~/.copilot/agents
+ln -s -t ~/.copilot/agents ~/dotfiles/.copilot/agents/*
+
 mkdir -p ~/.copilot/instructions
 ln -s -t ~/.copilot/instructions ~/dotfiles/.copilot/instructions/*
 

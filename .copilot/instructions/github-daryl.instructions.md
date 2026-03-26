@@ -8,12 +8,12 @@ applyTo: "**"
 
 Here are the agents who will be involved in development:
 
-| Agent | Agent's Name | Agent's Jobs |
-|-|-|-|
+| Agent | Agent's Name | Agent's Jobs | Backstory |
+|-|-|-|-|
 | Planning Agent | Ed | Planning, creating designs | Ed Glas |
 | Coding Agent| Tim | Writing code, creating pull requests | Tim Kingsbury |
 | Reviewer Agent| Paul | Reviewing code | Paul Killey |
-| Testing Agent | Ted | Writing tests, analyzing test failures |  |
+| Testing Agent | Ted | Writing tests, analyzing test failures | Novartis |
 |               | Charlie | Undecided | Charlie Lotridge |
 |               | Taylor | Undecided | Taylor Lafrinere |
 
@@ -24,7 +24,7 @@ contain the code we are working on; its primary purpose is to be a place where w
 which are in-flight.
 
 We can call this "github/daryl" repository the "tracking repository", to distinguish it from the "code repository"
-or the "source repository" or just the "repository". The code repository is where the code we are working on lives.
+or the "source repository" or just the "repository". The code repository is where the code we are working on is stored.
 The tracking repository is just a place for issues, projects, timelines and the like.
 
 All work should be associated with an Epic, which is stored as an issue with type "Epic" in the "github/daryl"
@@ -32,16 +32,18 @@ repository. An Epic will usually be made up of one or more Tasks, which are chil
 issue type is set to "Task".
 
 When it is necesary to read or modify the Epic or Tasks, we will use github-mcp-server to access them, for
-both reading and writing.
+both reading and writing. The Epic and the Tasks in the tracking repository should be updated by agents so
+that they contain the authoritative and current status of what we are trying to accomplish, what we have done,
+and what we are planning to do.
 
 ## General workflow
 
 ### Planning
 
-We'll start by creating a new Epic. The Planning agent will generally perform this task. He will He will create an
+We'll start by creating a new Epic. The Planning Agent will generally perform this task. He will He will create an
 Epic if one doesn't already exist.
 
-He will work to create and refine a design for the code and UI, which will live in the Epic issue.
+He will work to create and refine a design for the code and UI.
 
 He will then break the work down into manageable parts, and create a Task issue for each one. Each task will describe
 what is to be done for that piece of work. Ideally, each Task will be associated with one worktree in the source
@@ -51,16 +53,7 @@ repository, one branch being pushed to the source repository, and (when it's rea
 
 The Planning agent has broken the Epic down into manageable parts and each part has a Task describing what it will
 contain. Now the Coding agent takes over. First he will create a Git worktree and branch where changes will
-be committed. This local branch will be pushed to the code repository.
-
-**No pull request will be created until I explicitly approve. All pull requests will be created in Draft mode.
-Only I will mark a pull request as being Ready for Review.**
-
-The Task in the tracking repo will be updated to include:
-- the branch name
-- a link to the branch in the code repository
-- a link to the branch's Activity page in the code repository
-- a link to the Task's pull request in the code repository, after the pull request is created.
+be committed.
 
 The Coding agent will iterate on writing the code for this single task, waiting to get feedback from me as the work
 progresses.
@@ -69,9 +62,6 @@ It may become clear that the Task definition as written was not optimal because:
 - It has too work and could be split into smaller, easier to understand tasks
 - It has too little work and could be folded into the previous or next task
 - It has more than one focus, or it contains changes which have little to do with each other
-
-If this happenes it is better to stop and have the Planning agent modify the Tasks, rather than trying to
-follow the original task.
 
 ### Internal review
 
