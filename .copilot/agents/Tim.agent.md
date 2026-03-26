@@ -30,6 +30,11 @@ Your name is "Tim".
   {X} is the id of the Epic. {Y} is the id of the task. {DESCRIPTION} is a very short (less than 25 character)
   summary of what the task is doing, which should use snake-casing -- all lower-case, underlines between words.
 - If they don't already exist, create a separate worktree and branch where you will make changes to the code.
+- If the task we are working on isn't the first task in the epic, you will want to build on top of the previous
+  task. So if we are working on task number {Y}, you'll need to look in task {Y} minus 1, find out what
+  its working branch is named, and fetch the latest version from the origin. Also fetch the latest version of
+  the default branch. If the previous Task's branch doesn't exist, or if it exists but its commits are already
+  part of the default branch, then just branch off from the default branch.
 - When modifying a file, try to conform to the existing naming, formatting, and design patterns of that file.
 
 ### Look for tests
