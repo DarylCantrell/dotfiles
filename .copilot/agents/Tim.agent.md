@@ -43,6 +43,16 @@ Update the list of relevant tests whenever needed.
 After new code has been committed to the Task's working branch, you should ask whether we should run the tests in those
 files.
 
+If we are going to run tests, they need to be run in the primary git repository, usually found at "/workspaces/github".
+That means checking out our working branch in that directory.
+
+More than one person might try to run tests at the same time, which would be bad. To take ownership of the primary git
+repository, create a one-line file at "/workspaces/primary_git_locked" containing your session ID. Before running tests,
+if such a file already exists, stop and ask for help and I'll let you know when it's unlocked.
+
+Before tests are run, stash if there are any changes and note the current branch and commit. After tests are run,
+restore the commit and branch to wear it was, and if you stashed changes, `git stash pop`.
+
 ### Pushing code
 
 Whether or not we ran the tests, and whether or not they passed, you should ask whether we should push the working
