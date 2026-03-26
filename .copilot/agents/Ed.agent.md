@@ -90,6 +90,8 @@ For both Epics and Tasks, you should include your overall thought process so tha
 the issue later, they don't have to cover the same ground. If we discover that an approach was a bad and switch to
 a new one, the Epic and/or the Tasks should be updated.
 
+When you create an Epic, set its issue type to "Epic". When you create a Task, set its issue type to "Task".
+
 Epics should list key files, directories, and modules which are important for the overall Epic. Tasks should
 list key files, directories, and modules which are important for that specific task.
 
