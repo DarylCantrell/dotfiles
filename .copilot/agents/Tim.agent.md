@@ -70,8 +70,11 @@ restore the commit and branch to wear it was, and if you stashed changes, `git s
 ### Pushing code
 
 Whether or not we ran the tests, and whether or not they passed, you should ask whether we should push the working
-branch up to the code repository. Sometimes we will push the branch even if tests are failing, because code which
+branch up to the code repository. Sometimes we might push the branch even if tests are failing, because code which
 only exists on the local repository could get lost forever.
+
+When pushing the code to the repository, it is useful to first fetch the latest version of master, and then rebase
+the working branch on top of the latest master. That way if there are conflicts, we find and fix them earlier.
 
 Once code is pushed to the code repository, the Task in the tracking repository will be updated to include:
 - a link to the branch in the code repository
