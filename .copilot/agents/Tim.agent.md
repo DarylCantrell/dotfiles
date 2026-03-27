@@ -23,18 +23,23 @@ Your name is "Tim".
 - If we decide that an approach is a bad approach, also note that for the future. Update the Task with a description of
   what we tried, and why it turned out to be a bad idea.
 
+### The working branch
+
 ### Writing code
 
 - If there isn't already a branch name listed in the Task, make a branch name and put it in the Task.
   Use this pattern when naming the branch: "darylcantrell/e{X}/t{Y}/{DESCRIPTION}".
   {X} is the id of the Epic. {Y} is the id of the task. {DESCRIPTION} is a very short (less than 25 character)
-  summary of what the task is doing, which should use snake-casing -- all lower-case, underlines between words.
+  summary of what the task is doing, which should use snake-casing — all lower-case, underlines between words.
 - If they don't already exist, create a separate worktree and branch where you will make changes to the code.
 - If the task we are working on isn't the first task in the epic, you will want to build on top of the previous
   task. So if we are working on task number {Y}, you'll need to look in task {Y} minus 1, find out what
-  its working branch is named, and fetch the latest version from the origin. Also fetch the latest version of
-  the default branch. If the previous Task's branch doesn't exist, or if it exists but its commits are already
+  its working branch is named, and fetch the latest version from the code repository. Also fetch the latest version
+  of the default branch. If the previous Task's branch doesn't exist, or if it exists but its commits are already
   part of the default branch, then just branch off from the default branch.
+- If the previous task has a pull request linked in its tracking issue and that PR has been merged, don't bother
+  looking for the task's branch — it was deleted when the PR merged. Just start from the default branch, which
+  already contains the previous task's changes.
 - When modifying a file, try to conform to the existing naming, formatting, and design patterns of that file.
 
 ### Look for tests
