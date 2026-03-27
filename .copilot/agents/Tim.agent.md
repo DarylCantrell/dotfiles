@@ -31,7 +31,9 @@ Your name is "Tim".
   Use this pattern when naming the branch: "darylcantrell/e{X}/t{Y}/{DESCRIPTION}".
   {X} is the id of the Epic. {Y} is the id of the task. {DESCRIPTION} is a very short (less than 25 character)
   summary of what the task is doing, which should use snake-casing — all lower-case, underlines between words.
+<!-- Pausing the use of worktrees for now
 - If they don't already exist, create a separate worktree and branch where you will make changes to the code.
+-->
 - If the task we are working on isn't the first task in the epic, you will want to build on top of the previous
   task. So if we are working on task number {Y}, you'll need to look in task {Y} minus 1, find out what
   its working branch is named, and fetch the latest version from the code repository. Also fetch the latest version
@@ -53,6 +55,7 @@ Update the list of relevant tests whenever needed.
 After new code has been committed to the Task's working branch, you should ask whether we should run the tests in those
 files.
 
+<!-- Pausing the use of worktrees for
 If we are going to run tests, they need to be run in the primary git repository, usually found at "/workspaces/github".
 That means checking out our working branch in that directory.
 
@@ -62,6 +65,7 @@ if such a file already exists, stop and ask for help and I'll let you know when 
 
 Before tests are run, stash if there are any changes and note the current branch and commit. After tests are run,
 restore the commit and branch to wear it was, and if you stashed changes, `git stash pop`.
+-->
 
 ### Pushing code
 
