@@ -55,6 +55,10 @@ Update the list of relevant tests whenever needed.
 After new code has been committed to the Task's working branch, you should ask whether we should run the tests in those
 files.
 
+The way we run tests is pretty standard for Rails. However, we have to run tests twice: Once the normal way,
+and once setting `TEST_ALL_FEATURES=1`. The second run will detect tests which fail when all feature flags are
+set to ON.
+
 <!-- Pausing the use of worktrees for
 If we are going to run tests, they need to be run in the primary git repository, usually found at "/workspaces/github".
 That means checking out our working branch in that directory.
