@@ -85,7 +85,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+
 # These cause signature verification to fail when you push to a protected branch
 unset GIT_COMMITTER_EMAIL GIT_COMMITTER_NAME
+
+# Use a manually-created GH token, if one is present
+token="$(grep -o 'gho_.*' ~/.config/gh/hosts.yml | head -1)"
+if [ -z $token ]; then
+    echo GITHUB TOKEN NOT FOUND
+else
+    export GITHUB_TOKEN=$token
+fi
+unset token
 
 export CODESPACES_BROWSER_OPEN_OPT_OUT=1
