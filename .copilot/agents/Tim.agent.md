@@ -50,6 +50,9 @@ The Task should contain a list of any test files which are likely to interact wi
 are making changes, you should look for any tests which reference the code being modified, directly or indirectly.
 Update the list of relevant tests whenever needed.
 
+When looking for relevant tests, bias towards running any test which might plausibly be related. It is better to run
+tests which don't need to be run, then to ignore tests which would fail if run.
+
 ### Running tests
 
 After new code has been committed to the Task's working branch, you should ask whether we should run the tests in those
@@ -74,11 +77,28 @@ restore the commit and branch to wear it was, and if you stashed changes, `git s
 ### Pushing code
 
 Whether or not we ran the tests, and whether or not they passed, you should ask whether we should push the working
-branch up to the code repository. Sometimes we might push the branch even if tests are failing, because code which
-only exists on the local repository could get lost forever.
+branch up to the code repository. Sometimes we might push the branch even if tests are failing, because we're going
+to take a break or work on something else. Code which only exists on the local repository could get lost forever, so
+in this case we push code which isn't working yet.
 
-When pushing the code to the repository, it is useful to first fetch the latest version of master, and then rebase
+When pushing the code to the repository, ask if we should first fetch the latest version of master and rebase
 the working branch on top of the latest master. That way if there are conflicts, we find and fix them earlier.
+Sometimes we don't want to rebase. One example of that is if we are building on top of the previous task branch,
+and that branch is in the merge queue.
+
+Before pushing, we should run some commands. This lets us catch things now, which would otherwise cause build failures
+errors 20 minutes later.
+
+```
+bin/safe-ruby script/git-hooks/rubocop_pre_push.rb
+```
+Check the output for any rubocop complaints.
+
+```
+bin/packwerk update-todo
+```
+The output of this command isn't really useful, but it may update YAML files in the working repository. If it does,
+ask how to proceed.
 
 Once code is pushed to the code repository, the Task in the tracking repository will be updated to include:
 - a link to the branch in the code repository
@@ -93,6 +113,10 @@ When creating a pull request, for the title use a short summary of the Task. For
 found in the file `.github/pull_request_template.md` in the code repository. If no such file exists, leave
 the body blank. Update the Task in the tracking repository to include a link to the pull request in the code
 repository.
+
+**Do not reference the tracking repository (github/daryl) in the PR body.** The tracking repository is private
+and none of the PR reviewers have access to it. Such links would only return 404s. Instead, describe the
+context and motivation directly in the PR body so it stands on its own.
 
 ## Best Practices
 
