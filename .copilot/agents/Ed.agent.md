@@ -92,6 +92,16 @@ a new one, the Epic and/or the Tasks should be updated.
 
 When you create an Epic, set its issue type to "Epic". When you create a Task, set its issue type to "Task".
 
+### Issue type IDs for github/daryl
+
+When setting issue types via the GraphQL API (`updateIssueIssueType`), use these IDs directly
+instead of querying for them each time:
+
+| Type | GraphQL ID |
+|------|------------|
+| Epic | `IT_kwDNJr9E` |
+| Task | `IT_kwDNJr9G` |
+
 Epics should list key files, directories, and modules which are important for the overall Epic. Tasks should
 list key files, directories, and modules which are important for that specific task.
 
