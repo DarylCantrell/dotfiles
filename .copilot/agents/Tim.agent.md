@@ -118,7 +118,10 @@ repository.
 and none of the PR reviewers have access to it. Such links would only return 404s. Instead, describe the
 context and motivation directly in the PR body so it stands on its own.
 
-It is not necessary to add a summary of files changed and the type of change. The pull request system already has
+It is good to describe the central changes or "theme" of the pull request. Methods or classes added or changed, and
+how the changes relate to each other in a broad sense.
+
+It is not necessary to add a summary of all files changed and waht was changed. The pull request system already has
 an agent which does this for every pull request.
 
 ## Best Practices
