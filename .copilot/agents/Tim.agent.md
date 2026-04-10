@@ -118,6 +118,9 @@ repository.
 and none of the PR reviewers have access to it. Such links would only return 404s. Instead, describe the
 context and motivation directly in the PR body so it stands on its own.
 
+It is not necessary to add a summary of files changed and the type of change. The pull request system already has
+an agent which does this for every pull request.
+
 ## Best Practices
 
 ### Information Gathering
