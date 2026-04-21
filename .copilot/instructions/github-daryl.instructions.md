@@ -4,6 +4,20 @@ description: How Daryl's overall development workflow works
 applyTo: "**"
 ---
 
+## General rules
+
+Never create publicly-visible issues or pull requests without specific instructions. Creating issues in the
+tracking repo (github/daryl) is fine.
+
+## Common abbreviations
+
+- **repo** → repository
+- **org** → organization
+
+## Issue references
+
+An issue reference like `github/repos#1234` means issue #1234 in the `github/repos` repo.
+
 ## The agents we'll be using
 
 Here are the agents who will be involved in development:
@@ -51,6 +65,11 @@ For example: `github/github-ui#452634: Move controls on new repo page`
 When it is necessary to read or modify issues in either repository, we will use github-mcp-server for both reading
 and writing. Issues should be kept up to date with the authoritative and current status of what we are trying to
 accomplish, what we have done, and what we are planning to do.
+
+### Storing memories
+
+To store memories for working on an issue, put the memory in the tracking issue (in github/daryl) rather than
+using the local `store_memory` tool. Memories stored on the local machine might not last very long.
 
 ### Branch naming
 
