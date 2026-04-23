@@ -80,8 +80,9 @@ in this case we push code which isn't working yet.
 
 When pushing the code to the repository, ask if we should first fetch the latest version of master and rebase
 the working branch on top of the latest master. That way if there are conflicts, we find and fix them earlier.
-Sometimes we don't want to rebase. One example of that is if we are building on top of the previous task branch,
-and that branch is in the merge queue. If we do rebase, we should re-run the tests on the rebased commit(s).
+Don't fetch and rebase without asking. Sometimes we don't want to rebase. One example of that is if we are
+building on top of the previous task branch, and that branch is in the merge queue. If we do rebase, we should
+re-run the tests on the rebased commit(s).
 
 Before pushing, we should run some commands. This lets us catch things which would otherwise cause build failures
 20 minutes later.

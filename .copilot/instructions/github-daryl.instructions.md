@@ -4,19 +4,43 @@ description: How Daryl's overall development workflow works
 applyTo: "**"
 ---
 
-## General rules
-
-Never create publicly-visible issues or pull requests without specific instructions. Creating issues in the
-tracking repo (github/daryl) is fine.
-
-## Common abbreviations
+## Common abbreviations and shorthand
 
 - **repo** → repository
 - **org** → organization
+- **PR** → pull request
+
+## Repositories we use
+
+"Public repository" means a repository which other team members can see. It's not "public to the world", but others
+can see the issues and code. "public issues" and "public pull requests" refer to issues and pull requests in a public
+repo.
+
+Here are the most common public repos where we check code in and create pull requests:
+- "github" → github/github.
+- "github-ui" → github/github-ui
+
+Here are the most common public repos where we interact with issues, but they have no code:
+- "repos" → github/repos
+- "security" → github/repos-security
+
+The "private repo" is just for our notes and plans, so they don't clutter up the issues and pull requests with things
+that are useful to us, but not to team members:
+- "daryl" or "daryl repo" or "private repo" or "tracking repo" → github/daryl
 
 ## Issue references
 
-An issue reference like `github/repos#1234` means issue #1234 in the `github/repos` repo.
+If you see a reference like `security#1234` it means issue or pull request 1234 in the security repo
+(`github/repos-security`). `daryl#15` is issue 15 in the daryl repo, and so forth.
+
+## General rules
+
+Never create issues or pull requests in public repositories without getting specific instructions or asking permission.
+Creating issues in the tracking repo (github/daryl) is fine.
+
+In general, use lots of detail when updating tracking issues. This keeps us from forgetting things we already figured
+out. Use less details in public issues and pull requests. Don't clutter these up with exhaustive lists of files and
+what changed; the PR has that sort of thing already.
 
 ## The agents we'll be using
 
@@ -33,36 +57,36 @@ Here are the agents who will be involved in development:
 
 ## How to track work in progress
 
-Work always starts with an issue in the **code repository** (the repository where the code lives). The issue
-type depends on the size and nature of the work:
+Work always starts with an issue in a **public repository**. The issue type depends on the size and nature of the work:
 
 - **Bug**: A single issue for fixing something that is broken.
 - **Task**: A single issue for a small, self-contained piece of work.
 - **Epic**: A larger piece of work broken into multiple child Tasks. Each child Task is its own issue.
 
-Generally, there is a one-to-one correspondence between Tasks and pull requests.
+Generally, there should be a one-to-one correspondence between issues and pull requests. If one issue will require more
+than one pull request, we will create a child issue for each anticipated PR; the issue describes what will happen with
+that specific PR.
 
-Sometimes we create the issue ourselves. Other times, the issue already exists in the code repository because
+Sometimes we create the issue ourselves. Other times, the issue already exists in the public repository because
 someone else created it and assigned it to us. When picking up an existing issue, be careful not to overwrite
 the original author's description. If it's a short placeholder, we might replace it. Otherwise, add a comment
 on the issue to track our own notes and progress — ask what to do if unsure.
 
-We also use the "github/daryl" repository as a **tracking repository** for storing detailed planning state, design
-notes, and project timelines. The tracking repository does not contain code; it is a place for issues, projects,
-and timelines that track in-flight work. We can call it the "tracking repository" to distinguish it from the
-"code repository" or "source repository".
+The daryl repo or "tracking repo" is a place for storing detailed planning state, design
+notes, and project timelines. The tracking repository does not contain code; it contains one private issue for each
+public issue we are working on.
 
-For every piece of work, we create a corresponding issue in the tracking repository. This is where we store
+For every piece of work, we create a corresponding issue in the tracking repository if it doesn't exist. This is where we store
 design notes, implementation decisions, and detailed planning state that would be too verbose for the code
-repository issue. The title of a tracking issue should reference the code repository issue using this format:
+repository issue. The title of a tracking issue should reference the public repository issue using this format:
 
 ```
-{OWNER}/{REPO}#{ISSUE_ID}: Short description
+{REPO_NAME}#{ISSUE_ID}: Short description
 ```
 
-For example: `github/github-ui#452634: Move controls on new repo page`
+For example: `github-ui#452634: Move controls on new repo page`
 
-When it is necessary to read or modify issues in either repository, we will use github-mcp-server for both reading
+When it is necessary to read or modify issues or pull requests, we will use github-mcp-server for both reading
 and writing. Issues should be kept up to date with the authoritative and current status of what we are trying to
 accomplish, what we have done, and what we are planning to do.
 
@@ -79,25 +103,25 @@ Working branches are named using this pattern:
 darylcantrell/{issue_number}_short_description
 ```
 
-Where `{issue_number}` is the issue number from the **code repository**, and `short_description` is a very short
+Where `{issue_number}` is the issue number from the **public repository**, and `short_description` is a very short
 summary of what the branch is for, using snake_case (all lower-case, underscores between words).
 
 ## General workflow
 
 ### Planning
 
-Work starts with an issue in the code repository — either one we create ourselves (a Bug, Task, or Epic depending
+Work starts with an issue in the public repository — either one we create ourselves (a Bug, Task, or Epic depending
 on the scope), or one that already exists because someone else created and assigned it to us. The Planning Agent
 will create the code repo issue if one doesn't already exist. For large work, the Planning Agent will create an
-Epic and break the work down into manageable child Tasks, each of which is its own issue in the code repository.
+Epic and break the work down into manageable child Tasks, each of which is its own issue in the public repository.
 
 In either case, the Planning Agent creates a corresponding tracking issue in github/daryl, titled with a reference
-to the code repository issue (e.g. `github/github#12345: Short description`).
+to the public repository issue (e.g. `github/github#12345: Short description`).
 
 He will work to create and refine a design for the code and UI.
 
 Each Task describes what is to be done for that piece of work. Ideally, each Task will be associated with one
-branch in the code repository and (when it's ready) one pull request.
+branch in the public repository and (when it's ready) one pull request.
 
 ### Coding
 

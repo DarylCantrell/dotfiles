@@ -130,7 +130,7 @@ if [ -f /workspaces/github/README.md ]; then
 
     title "gh-server"
     sleep 7
-    /workspaces/github/script/server -d || true
+    /workspaces/github/script/server -d $* || true
     title
   }
 
