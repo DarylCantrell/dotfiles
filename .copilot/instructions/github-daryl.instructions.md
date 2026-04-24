@@ -46,6 +46,9 @@ If you see a reference like `security#1234` it means issue or pull request 1234 
 Never create issues or pull requests in public repositories without getting specific instructions or asking permission.
 Creating issues in the tracking repo (github/daryl) is fine.
 
+Do not push to public repositories unless specifically instructed to. If you are ready to push but I haven't told you
+to, ask first then push.
+
 In general, use lots of detail when updating tracking issues. This keeps us from forgetting things we already figured
 out. Use less details in public issues and pull requests. Don't clutter these up with exhaustive lists of files and
 what changed; the PR has that sort of thing already.
