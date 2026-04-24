@@ -13,8 +13,8 @@ applyTo: "**"
 ## Repositories we use
 
 "Public repository" means a repository which other team members can see. It's not "public to the world", but others
-can see the issues and code. "public issues" and "public pull requests" refer to issues and pull requests in a public
-repo.
+can see the issues and code. Terms like "public issues" and "public pull requests" refer to issues and pull requests
+in a public repo.
 
 Here are the most common public repos where we check code in and create pull requests:
 - "github" → github/github.
@@ -27,6 +27,14 @@ Here are the most common public repos where we interact with issues, but they ha
 The "private repo" is just for our notes and plans, so they don't clutter up the issues and pull requests with things
 that are useful to us, but not to team members:
 - "daryl" or "daryl repo" or "private repo" or "tracking repo" → github/daryl
+
+ "Tracking issue" means the issue in the private repo which is tracking a specific public issue.
+
+ "Related issues" means this: for any public issue, find its top-level parent issue -- the issue with no parent. That
+ might be itself. Then find all issues which are descendents of any degree, of that top-level issue. The top-level
+ issue plus all of descendents is the set of "related issues". Traking issues should not have parents or children,
+ so if we talk about the "related issues" of a tracking issue, you would have to find these by looking at the public
+ issue it is tracking.
 
 ## Issue references
 
@@ -63,7 +71,12 @@ Work always starts with an issue in a **public repository**. The issue type depe
 - **Task**: A single issue for a small, self-contained piece of work.
 - **Epic**: A larger piece of work broken into multiple child Tasks. Each child Task is its own issue.
 
-Generally, there should be a one-to-one correspondence between issues and pull requests. If one issue will require more
+For each issue we work on, there will be one tracking issue for internal notes, thoughts, and memories about that work.
+
+The issues we create in the tracking repo do not have parent/child relationships; they are linked to one specific public
+issue. The hierarchy, if any, is expressed in the public issues.
+
+There should be a one-to-one correspondence between issues and pull requests. If one issue will require more
 than one pull request, we will create a child issue for each anticipated PR; the issue describes what will happen with
 that specific PR.
 
@@ -72,12 +85,12 @@ someone else created it and assigned it to us. When picking up an existing issue
 the original author's description. If it's a short placeholder, we might replace it. Otherwise, add a comment
 on the issue to track our own notes and progress — ask what to do if unsure.
 
-The daryl repo or "tracking repo" is a place for storing detailed planning state, design
+The "private repo" or "tracking repo" is a place for storing detailed planning state, design
 notes, and project timelines. The tracking repository does not contain code; it contains one private issue for each
-public issue we are working on.
+public issue we are or will be working on.
 
-For every piece of work, we create a corresponding issue in the tracking repository if it doesn't exist. This is where we store
-design notes, implementation decisions, and detailed planning state that would be too verbose for the code
+For every public issue we work on, we create a corresponding issue in the tracking repository if it doesn't exist.
+This is where we store design notes, implementation decisions, and detailed planning state that would be too verbose for the code
 repository issue. The title of a tracking issue should reference the public repository issue using this format:
 
 ```
@@ -100,13 +113,24 @@ using the local `store_memory` tool. Memories stored on the local machine might 
 Working branches are named using this pattern:
 
 ```
-darylcantrell/{issue_number}_short_description
+darylcantrell/{issue_number}_{short_description}
 ```
 
 Where `{issue_number}` is the issue number from the **public repository**, and `short_description` is a very short
 summary of what the branch is for, using snake_case (all lower-case, underscores between words).
 
+When we create a branch for an issue, put a link to that branch in the tracking issue. If we create a pull request,
+we should also link to that from the tracking issue.
+
 ## General workflow
+
+### Gathering info
+
+When we start working on an issue, first we should read all the artifacts in GitHub:
+
+- The issue we are working on and all related issues. This includes both the public issues and their tracking issues.
+- See if there's an existing pull request for the issue. If so, a link should exist in the tracking issue. Ifa PR
+  exists, read that as well.
 
 ### Planning
 
@@ -144,16 +168,21 @@ focus on finding weaknesses in the design, or ways in which the code might be im
 
 ### Tracking tests
 
-In general, the top-level issue in the tracking repository (Epic if one exists, otherwise a Task or Bug) should keep
-a list of all tests which are relevant to the work in progress. Usually this will just be a list of files, and every
-test in the listed file is run. Ed will populate an initial list during planning.
+Every tracking issue should keep a list of all tests which are relevant to the work for that issue.
+Usually this will just be a list of files, with every test in the listed file run.
+Whenever we add to this list, remember to add it to both the tracking issue we are working on, and the tracking issues
+for all of the public issue's ancestors (if any). Ed will populate an initial list during planning.
 
-During development, Tim will probably add new tests. We might also deicover new tests which are relevant and should be
+When we run tests, we should run any test which is listed in the public issue we're working on, or any of its ancestors.
+Note that you can't just look at the public issue's parents, since the list of tests is in the tracking issue. You have
+to find the tracking issue for each ancestor.
+
+During development, Tim will probably add new tests. We might also discover new tests which are relevant and should be
 run, as development proceeds. It's also possible that when we submit a pull request and the CI builds run, some tests
 in unexpected files will fail.
 
-This list should grow over time. Don't remove items from this list unless specifically instructed to. Any test file
-which had failures or problems during an earlier phase of a long epic is worth running for the remainder of the epic.
+This list of tests should grow over time. Don't remove items from this list unless specifically instructed to. Any test file
+which had failures or problems during any earlier phase of a multi-issue task is worth running for the remainder of the work effort.
 
 Finding a failing test after pushing new code will often take 20 minutes or more. It is better to run unnecessary
 tests locally before pushing, than to omit a test and potentially lose half an hour of development time.
