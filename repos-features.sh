@@ -1,17 +1,18 @@
-bin/toggle-feature-flag enable merge_queue_rule_engine
+# ?
 bin/toggle-feature-flag enable new_restricted_commits_rule
-bin/toggle-feature-flag enable mergebox_react_partial
-bin/toggle-feature-flag enable read_from_mergebox_json_api
-bin/toggle-feature-flag enable status_checks_json
 bin/toggle-feature-flag enable rule_pr_required_reviewers_filter_suggestions
 bin/toggle-feature-flag enable rule_pr_required_reviewers_enforce
-bin/toggle-feature-flag enable last_reviewable_push_use_new_algo
 
+# Org- and ent-level "repo rules"
 bin/toggle-feature-flag enable repo_policy_bypass
 bin/toggle-feature-flag enable member_privilege_rulesets
-bin/toggle-feature-flag enable push_rulesets
-bin/toggle-feature-flag enable repo_org_rules
-bin/toggle-feature-flag enable organization_policies
-bin/toggle-feature-flag enable push_ruleset_delegated_bypass
-bin/toggle-feature-flag enable updated_bypass_requests_ui
-bin/toggle-feature-flag enable rule_suite_save_before_instrument
+
+# Ent teams as bypassers
+bin/toggle-feature-flag enable enterprise_rulesets_enterprise_teams
+
+# Relaxed rename ruleset protections
+bin/toggle-feature-flag enable org_rules_relaxed_rename
+bin/toggle-feature-flag enable rule_insights_branch_rename_annotation
+bin/toggle-feature-flag enable ent_rules_relaxed_rename
+bin/toggle-feature-flag enable branch_rename_enterprise_rule_protections_enforce
+bin/toggle-feature-flag enable branch_rename_enterprise_rule_protections
