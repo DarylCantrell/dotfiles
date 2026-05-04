@@ -113,6 +113,8 @@ too verbose for the code repository issue. For both Epics and Tasks, include you
 that when you or someone else looks at the issue later, they don't have to cover the same ground. If we
 discover that an approach was bad and switch to a new one, the tracking issue should be updated.
 
+In general, the "issue type" for a private tracking issue should match the public issue it is tracking.
+
 ### Issue type IDs for github/daryl
 
 When setting issue types in the **tracking repository** (github/daryl) via the GraphQL API
