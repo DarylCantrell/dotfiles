@@ -83,7 +83,15 @@ Don't fetch and rebase without asking.
 Sometimes we don't want to rebase. One example of that is if we are building on top of a previous issue branch, and
 that branch is in the merge queue.
 
-If we do rebase, we should re-run the tests on the rebased commit(s).
+If we do rebase, we should also run database migrations (in case master picked up
+schema changes). Run them in both development and test environments:
+
+```
+bin/rails db:migrate
+RAILS_ENV=test bin/rails db:migrate
+```
+
+Then re-run the tests on the rebased commit(s).
 
 Before pushing, we should run some commands. This lets us catch things which would otherwise cause build failures
 20 minutes later.
