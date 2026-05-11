@@ -100,6 +100,21 @@ fetch() {
   git fetch origin "$@:$@"
 }
 
+### Copilot CLI with pre-approved shell commands
+
+copilot() {
+  local config=~/dotfiles/.copilot/pre_approved_commands.config
+  local args=(--add-dir /workspaces/github --add-dir /workspaces/github-ui --add-dir /home/vscode/dotfiles)
+  if [ -r "$config" ]; then
+    local line
+    while IFS= read -r line || [ -n "$line" ]; do
+      [ -z "$line" ] && continue
+      args+=(--allow-tool "shell($line)")
+    done < "$config"
+  fi
+  command copilot "${args[@]}" "$@"
+}
+
 ### Specific to github/github codespaces
 
 if [ -f /workspaces/github/README.md ]; then
