@@ -134,6 +134,9 @@ if [ -f /workspaces/github/README.md ]; then
   alias gotest='TEST_GOTAUTH=1 USE_FM_LITE=1 rtest'
   alias gofftest='TEST_GOTAUTH=1 USE_FM_LITE=1 fftest'
 
+  alias dbmigrate='bin/rails db:migrate db:test:soft_reset'
+  alias sorbet='bin/tapioca dsl'
+
   alias rubo='bin/safe-ruby script/git-hooks/rubocop_pre_push.rb'
 
   server() {
