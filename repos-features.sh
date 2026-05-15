@@ -1,3 +1,9 @@
+# Copilot Enterprise Rules
+bin/toggle-feature-flag enable copilot_model_registry_stafftools
+bin/toggle-feature-flag enable stafftools_copilot_rules_resync
+bin/toggle-feature-flag enable use_setting_rules_copilot_models
+bin/toggle-feature-flag enable copilot_default_models_app
+
 # ?
 bin/toggle-feature-flag enable new_restricted_commits_rule
 bin/toggle-feature-flag enable rule_pr_required_reviewers_filter_suggestions
