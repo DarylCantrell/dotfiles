@@ -107,6 +107,11 @@ bin/packwerk update-todo
 The output of this command isn't really useful, but when it's run, it may update YAML files in the working repository. If it does,
 ask how to proceed.
 
+```
+bin/sorbet-janky
+```
+Look at the output for any errors.
+
 Once code is pushed to the public repo, the tracking issue in the public repo will be updated to include:
 - a link to the branch in the public repo
 - a link to the branch's Activity page in the public repo

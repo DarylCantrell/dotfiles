@@ -20,19 +20,19 @@ Here are the most common public repos where we check code in and create pull req
 - "github" → github/github.
 - "github-ui" → github/github-ui
 
-Here are the most common public repos where we interact with issues, but they have no code:
+Here are the most common public repos where we interact with issues. They have no real code, just some HOWTO files:
 - "repos" → github/repos
 - "security" → github/repos-security
 
 The "private repo" is just for our notes and plans, so they don't clutter up the issues and pull requests with things
 that are useful to us, but not to team members:
-- "daryl" or "daryl repo" or "private repo" or "tracking repo" → github/daryl
+- "daryl" or "daryl repo" or "private" or "private repo" or "tracking repo" → github/daryl
 
  "Tracking issue" means the issue in the private repo which is tracking a specific public issue.
 
- "Related issues" means this: for any public issue, find its top-level parent issue -- the issue with no parent. That
- might be itself. Then find all issues which are descendents of any degree, of that top-level issue. The top-level
- issue plus all of descendents is the set of "related issues". Traking issues should not have parents or children,
+ "Related issues" means this: for any public issue, find its top-level parent issue -- the public issue with no parent. That
+ might be itself. Then find all issues which are descendents (of any degree) of that top-level issue. The top-level
+ issue plus all of descendents is the set of "related issues". Tracking issues should not have parents or children,
  so if we talk about the "related issues" of a tracking issue, you would have to find these by looking at the public
  issue it is tracking.
 
@@ -68,7 +68,8 @@ Here are the agents who will be involved in development:
 
 ## How to track work in progress
 
-Work always starts with an issue in a **public repository**. The issue type depends on the size and nature of the work:
+Work almost always starts with an issue in a **public repository**. The issue type depends on the size and nature of
+the work:
 
 - **Bug**: A single issue for fixing something that is broken.
 - **Task**: A single issue for a small, self-contained piece of work.
@@ -83,17 +84,15 @@ There should be a one-to-one correspondence between issues and pull requests. If
 than one pull request, we will create a child issue for each anticipated PR; the issue describes what will happen with
 that specific PR.
 
-Sometimes we create the issue ourselves. Other times, the issue already exists in the public repository because
+Sometimes we create the public issue ourselves. Other times, the issue already exists in the public repository because
 someone else created it and assigned it to us. When picking up an existing issue, be careful not to overwrite
-the original author's description. If it's a short placeholder, we might replace it. Otherwise, add a comment
-on the issue to track our own notes and progress — ask what to do if unsure.
+the original author's description. If it's just a short placeholder description (a few sentences), we might replace it.
+Otherwise, add a comment on the issue to track our own notes and progress — ask what to do if unsure.
 
 The "private repo" or "tracking repo" is a place for storing detailed planning state, design
-notes, and project timelines. The tracking repository does not contain code; it contains one private issue for each
-public issue we are or will be working on.
-
-For every public issue we work on, we create a corresponding issue in the tracking repository if it doesn't exist.
-This is where we store design notes, implementation decisions, and detailed planning state that would be too verbose for the code
+notes, and project timelines. The tracking repository does not contain any code. For every public issue we work on,
+we create a corresponding issue in the tracking repository if it doesn't exist. This is where we store design notes,
+implementation decisions, and detailed planning state that would be too verbose for the code
 repository issue. The title of a tracking issue should reference the public repository issue using this format:
 
 ```
