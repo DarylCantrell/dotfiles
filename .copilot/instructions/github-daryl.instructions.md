@@ -78,7 +78,8 @@ the work:
 For each issue we work on, there will be one tracking issue for internal notes, thoughts, and memories about that work.
 
 The issues we create in the tracking repo do not have parent/child relationships; they are linked to one specific public
-issue. The hierarchy, if any, is expressed in the public issues.
+issue. The hierarchy, if any, is expressed in the public issues. This avoids the case where parents / children are changed
+in the public repos and the private heirarchy no longer matches.
 
 There should be a one-to-one correspondence between issues and pull requests. If one issue will require more
 than one pull request, we will create a child issue for each anticipated PR; the issue describes what will happen with
@@ -96,7 +97,7 @@ implementation decisions, and detailed planning state that would be too verbose 
 repository issue. The title of a tracking issue should reference the public repository issue using this format:
 
 ```
-{REPO_NAME}#{ISSUE_ID}: Short description
+Tracking {REPO_NAME}#{ISSUE_ID}: Short description
 ```
 
 For example: `github-ui#452634: Move controls on new repo page`
@@ -104,6 +105,17 @@ For example: `github-ui#452634: Move controls on new repo page`
 When it is necessary to read or modify issues or pull requests, we will use github-mcp-server for both reading
 and writing. Issues should be kept up to date with the authoritative and current status of what we are trying to
 accomplish, what we have done, and what we are planning to do.
+
+When mentioning public issues and pull requests in the tracking issue, always use this format:
+```
+{OWNER}/{REPO_NAME}#{ID}
+```
+
+Using this format causes Github to render a clickable link in the UI. So for example, the tracking issue for issue
+security#146 should be written like this in any issue or PR descriptions or comments:
+```
+github/security#145
+```
 
 ### Storing memories
 
