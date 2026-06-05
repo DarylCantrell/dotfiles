@@ -97,10 +97,10 @@ implementation decisions, and detailed planning state that would be too verbose 
 repository issue. The title of a tracking issue should reference the public repository issue using this format:
 
 ```
-Tracking {REPO_NAME}#{ISSUE_ID}: Short description
+Track {REPO_NAME}#{ISSUE_ID}: Short description
 ```
 
-For example: `github-ui#452634: Move controls on new repo page`
+For example: `Track github-ui#452634: Move controls on new repo page`
 
 When it is necessary to read or modify issues or pull requests, we will use github-mcp-server for both reading
 and writing. Issues should be kept up to date with the authoritative and current status of what we are trying to

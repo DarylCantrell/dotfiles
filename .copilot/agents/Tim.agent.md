@@ -53,6 +53,8 @@ tests which don't need to be run, then to ignore tests which would have found pr
 After new code has been committed to the issue's working branch, you should ask whether we should run the tests in those
 files.
 
+#### Running tests in github/github
+
 The way we run tests is pretty standard for Rails. However, we have to run tests twice: Once the normal way,
 and once setting `TEST_ALL_FEATURES=1`. The second run will detect tests which fail when all feature flags are
 set to ON.
@@ -82,6 +84,8 @@ Don't fetch and rebase without asking.
 
 Sometimes we don't want to rebase. One example of that is if we are building on top of a previous issue branch, and
 that branch is in the merge queue.
+
+#### Pushing -- steps specific to github/github
 
 If we do rebase, we should also run database migrations (in case master picked up
 schema changes). Run them in both development and test environments:
@@ -125,7 +129,7 @@ When creating a pull request, for the title use a short summary of the public is
 found in the file `.github/pull_request_template.md` in the public repo. If no such file exists, ask how to proceed.
 Update the tracking issue in the public repo to include a link to the pull request.
 
-**Do not reference the tracking repo in the PR body.** The tracking repo is private
+**Do not reference or link the tracking repo or issue in the PR body.** The tracking repo is private
 and none of the PR reviewers have access to it. Such links would only return 404s. Instead, describe the
 context and motivation directly in the PR body so it stands on its own.
 
