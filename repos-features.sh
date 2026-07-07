@@ -23,3 +23,9 @@ bin/toggle-feature-flag enable ent_rules_relaxed_rename
 bin/toggle-feature-flag enable branch_rename_enterprise_rule_protections_enforce
 bin/toggle-feature-flag enable branch_rename_enterprise_rule_protections
 bin/toggle-feature-flag enable use_relaxed_rename_for_default_switch
+
+# Settings / code quality
+bin/toggle-feature-flag enable code_quality_org_targeting
+bin/toggle-feature-flag enable code_quality_turboscan_job_enablement
+bin/toggle-feature-flag enable settings_sdk_listeners
+bin/toggle-feature-flag enable code_quality_new_repo_selection_card
