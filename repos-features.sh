@@ -30,3 +30,4 @@ bin/toggle-feature-flag enable code_quality_turboscan_job_enablement
 bin/toggle-feature-flag enable settings_sdk_listeners
 bin/toggle-feature-flag enable code_quality_new_repo_selection_card
 bin/toggle-feature-flag enable code_quality_org_targeting_stafftools
+bin/toggle-feature-flag enable code_quality_org_settings
