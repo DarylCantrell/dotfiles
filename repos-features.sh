@@ -31,3 +31,7 @@ bin/toggle-feature-flag enable settings_sdk_listeners
 bin/toggle-feature-flag enable code_quality_new_repo_selection_card
 bin/toggle-feature-flag enable code_quality_org_targeting_stafftools
 bin/toggle-feature-flag enable code_quality_org_settings
+
+# Push-rules ignore paths
+bin/toggle-feature-flag enable rule_ignored_file_paths
+bin/toggle-feature-flag enable rule_ignored_file_paths_enforce
