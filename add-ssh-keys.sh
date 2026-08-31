@@ -24,7 +24,7 @@ mysql -D github_development << EOF
 	SELECT id INTO @collab_id FROM users WHERE login = 'collaborator';
 	SELECT id INTO @outsider_id FROM users WHERE login = 'outsider';
 
-	INSERT INTO public_keys (
+	INSERT INTO github_development_authnd.public_keys (
 		user_id, creator_id, verifier_id,
 		\`key\`,
 		fingerprint_sha256,
