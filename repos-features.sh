@@ -35,3 +35,14 @@ bin/toggle-feature-flag enable code_quality_org_settings
 # Push-rules ignore paths
 bin/toggle-feature-flag enable rule_ignored_file_paths
 bin/toggle-feature-flag enable rule_ignored_file_paths_enforce
+
+# PoP
+bin/toggle-feature-flag enable proof_of_presence
+# bin/toggle-feature-flag enable proof_of_presence_cosmos
+# bin/toggle-feature-flag enable proof_of_presence_security_key
+# bin/toggle-feature-flag enable proof_of_presence_saml_all_idps
+bin/toggle-feature-flag enable proof_of_presence_ruleset_enforcement
+bin/toggle-feature-flag enable proof_of_presence_ruleset
+bin/toggle-feature-flag enable proof_of_presence_pr_rollout
+bin/toggle-feature-flag enable proof_of_presence_enforcement
+bin/toggle-feature-flag enable proof_of_presence_graphql
