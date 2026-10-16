@@ -47,7 +47,7 @@ bin/toggle-feature-flag enable proof_of_presence_pr_rollout
 bin/toggle-feature-flag enable proof_of_presence_enforcement
 bin/toggle-feature-flag enable proof_of_presence_graphql
 
-# stacks
+# stacks livesite 10/14
 bin/toggle-feature-flag enable pull_request_stacks
 bin/toggle-feature-flag enable pull_request_stacks_async_merge
 bin/toggle-feature-flag enable pull_request_stacks_batch_merge_commit_validation
@@ -55,26 +55,27 @@ bin/toggle-feature-flag enable pull_request_stacks_direct_merge_queued_ancestor_
 bin/toggle-feature-flag enable pull_request_stacks_disable_auto_merge_on_failure
 bin/toggle-feature-flag enable pull_request_stacks_effective_entry_statuses
 bin/toggle-feature-flag enable pull_request_stacks_feedback_dialog
-bin/toggle-feature-flag enable pull_request_stacks_mq_squash
+bin/toggle-feature-flag enable pull_request_stacks_merge_commit_per_pull_dry_run*
+bin/toggle-feature-flag enable pull_request_stacks_navigation_shortcuts*
 bin/toggle-feature-flag enable pull_request_stacks_new_rebasing_ui
 bin/toggle-feature-flag enable pull_request_stacks_preserve_signatures_on_rebase
 bin/toggle-feature-flag enable pull_request_stacks_rebase_defer_push_jobs
 bin/toggle-feature-flag enable pull_request_stacks_rebase_without_merge_commit
-bin/toggle-feature-flag enable pull_request_stacks_rest_api
+bin/toggle-feature-flag enable pull_request_stacks_ref_update_base_missing_error
+bin/toggle-feature-flag enable pull_request_stacks_retarget_base_on_delete
+bin/toggle-feature-flag enable pull_request_stacks_retry_retarget_during_merge_queue_cleanup
+bin/toggle-feature-flag enable pull_request_stacks_review_promotion
 bin/toggle-feature-flag enable pull_request_stacks_show_all_entries_statuses
 bin/toggle-feature-flag enable pull_request_stacks_stop_skipping_checks
 bin/toggle-feature-flag enable pull_request_stacks_thorough_auto_merge_check
 bin/toggle-feature-flag enable pull_request_stacks_timeline_events
 bin/toggle-feature-flag enable pull_request_stacks_update_merge_conflict_and_rebase_ui
-
-# bin/toggle-feature-flag enable pull_request_stacks_mq_allowlist                  # partially shipped partially staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_mq_no_squash                  # partially shipped partially staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_navigation_shortcuts          # partially shipped staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_opt_out                       # partially shipped not staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_ref_update_base_missing_error # partially shipped not staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_retarget_base_on_delete       # partially shipped staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_review_promotion              # partially shipped not staffshipped
-
-# bin/toggle-feature-flag enable pull_request_stacks_effective_status_rule_evaluation # partially shipped not staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_hide_ineligible_add_action       # disabled not staffshipped
-# bin/toggle-feature-flag enable pull_request_stacks_pancake_icon                     # disabled not staffshipped
+# bin/toggle-feature-flag enable pull_request_stacks_auto_merge
+# bin/toggle-feature-flag enable pull_request_stacks_closed_entry_status
+# bin/toggle-feature-flag enable pull_request_stacks_copy_links
+# bin/toggle-feature-flag enable pull_request_stacks_effective_status_rule_evaluation
+# bin/toggle-feature-flag enable pull_request_stacks_hide_ineligible_add_action
+# bin/toggle-feature-flag enable pull_request_stacks_merge_commit_per_pull
+# bin/toggle-feature-flag enable pull_request_stacks_opt_out
+# bin/toggle-feature-flag enable pull_request_stacks_pancake_icon
+# bin/toggle-feature-flag enable pull_request_stacks_rest_api_rebase

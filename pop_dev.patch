@@ -1,0 +1,120 @@
+diff --git a/lib/configurable/proof_of_presence_required.rb b/lib/configurable/proof_of_presence_required.rb
+index 1b5c721c79acd..7e390fedcf28e 100644
+--- a/lib/configurable/proof_of_presence_required.rb
++++ b/lib/configurable/proof_of_presence_required.rb
+@@ -145,24 +145,7 @@ module Configurable
+     #
+     # Returns a Boolean.
+     def proof_of_presence_eligible?
+-      return false unless is_a?(::Business)
+-
+-      business = T.cast(self, ::Business)
+-      return false unless business.enterprise_managed_user_enabled?
+-
+-      # find_provider_type reads the OIDC provider enum (azure-only) or matches
+-      # the SAML issuer. OIDC wins when both providers are configured, so it's
+-      # checked first against the OIDC provider specifically -- not
+-      # `external_provider`, which would resolve to the SAML row instead and
+-      # evaluate the wrong protocol's provider.
+-      if business.oidc_enabled?
+-        return business.oidc_provider&.find_provider_type == :azure_ad
+-      end
+-
+-      return false unless business.saml_sso_enabled?
+-      return true if business.saml_provider&.find_provider_type == :azure_ad
+-
+-      GitHub.proof_of_presence_saml_all_idps_enabled?(business: business)
++      return is_a?(::Business)
+     end
+ 
+     # Public: Can the PoP requirement be configured on this object?
+diff --git a/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule.rb b/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule.rb
+index 64e1b6b50953a..e15ff01741cff 100644
+--- a/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule.rb
++++ b/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule.rb
+@@ -543,9 +543,7 @@ module RuleEngine
+ 
+       sig { params(source: T.nilable(Types::RuleSource)).returns(T::Boolean) }
+       def proof_of_presence_supported_for_source?(source)
+-        return false unless source&.feature_enabled_for_source?(:proof_of_presence_ruleset)
+-
+-        business_for_source(source)&.proof_of_presence_supported? || false
++        true
+       end
+ 
+       sig { params(source: T.nilable(Types::RuleSource)).returns(T.nilable(Business)) }
+diff --git a/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule_proof_of_presence_evaluator.rb b/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule_proof_of_presence_evaluator.rb
+index e143002d29353..a639d54de416a 100644
+--- a/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule_proof_of_presence_evaluator.rb
++++ b/packages/branch_protections/app/models/rule_engine/rules/pull_request_rule_proof_of_presence_evaluator.rb
+@@ -105,6 +105,16 @@ module RuleEngine
+         const :repository, Repository
+       end
+ 
++      sig { params(pr_id: Integer, pop_method: String).void }
++      def self.create_outcome(pr_id:, pop_method: "reauth")
++        pr = PullRequest.find(pr_id)
++        mona = User.find(2)
++        ref = ProofOfPresence::Reference.new(pull_request_id: pr_id, head_sha: pr.head_sha, base_sha: pr.base_sha)
++        ProofOfPresence.record_reference_outcome(pull_request: pr, reference: ref, actor: mona,
++          authentication_method: pop_method,
++          identity_oid: "aaaaaaaa-9b46-485b-9b69-318b5b61a8c2", identity_tenant_id: "22222222-9b46-485b-9b69-318b5b61a8d2")
++      end
++
+       sig do
+         params(
+           pull_requests: T::Array[PullRequest],
+@@ -178,8 +188,15 @@ module RuleEngine
+         rescue ArgumentError
+           return evaluation(state: ERROR_STATE, code: :invalid_rule_configuration)
+         end
++        # debugger
+         return Evaluation.new(blocking: false, metadata: nil) if level.nil?
+ 
++        create_fake = DateTime.now < 10
++
++        if create_fake
++          return evaluation(state: COMPLETED_STATE, code: :proof_of_presence_completed, level:)
++        end
++
+         pull_request_context = @pull_request_context
+         return Evaluation.new(blocking: false, metadata: nil) unless pull_request_context
+         error_code = @error_code
+@@ -192,6 +209,7 @@ module RuleEngine
+         end
+ 
+         requirement = ProofOfPresence.strategy_for(@business)&.requirement_for_level(level, business: @business)
++        requirement ||= ProofOfPresence::PopStrategy::SAML.new.requirement_for_level(level, business: @business) # debugger
+         if requirement.nil?
+           return evaluation(state: ERROR_STATE, code: :challenge_requirement_unresolved, level:)
+         end
+@@ -260,6 +278,7 @@ module RuleEngine
+         ).returns(T::Hash[IRuleConfig, Evaluation])
+       end
+       def self.evaluate_pull_request(pull_request:, rule_configs:, ref_update:, actor:, business:, challenge_level:)
++        # debugger
+         outcome_context = outcome_for(
+           pull_request:,
+           rule_configs:,
+@@ -441,6 +460,7 @@ module RuleEngine
+         initiation = if state == PENDING_STATE && context && level
+           proof_of_presence_initiation_metadata(context, @challenge_level || level)
+         end
++        x =
+         Evaluation.new(
+           blocking: !completed,
+           reason:,
+@@ -460,6 +480,13 @@ module RuleEngine
+             "initiation" => initiation,
+           }.compact,
+         )
++
++        # T.must(x.metadata)["verified_authentication_level"] = Configurable::ProofOfPresenceRequired::REAUTH
++        # T.must(x.metadata)["verified_at"] = Time.now.utc.iso8601
++        # T.must(x.metadata)["verifier_id"] = 2
++        # debugger
++
++        x
+       end
+ 
+       sig { returns(T.nilable(T::Hash[String, T.untyped])) }
