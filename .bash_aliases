@@ -220,6 +220,27 @@ if [ -f /workspaces/github/README.md ]; then
     git push $force origin $*
   }
 
+  pushstack () {
+    if [ -z "$@" ]; then
+      echo "Usage: $0 <branch_name_prefix>"
+      return 1
+    fi
+
+    local currentBranch=`git branch --show-current`;
+    if [ -z "$currentBranch" ]; then
+        currentBranch=`git rev-parse --verify HEAD`;
+    fi;
+
+    newbranch "$1"_1 || return 1;
+    pushtouchbranch "$1"_1 || return 1;
+
+    git checkout "$1"_1 || return 1;
+    newbranch "$1"_2 || return 1;
+    pushtouchbranch "$1"_2 || return 1;
+
+    git checkout $currentBranch
+  }
+
   apiget() {
     curl \
       -X GET \
