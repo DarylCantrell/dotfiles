@@ -79,3 +79,7 @@ bin/toggle-feature-flag enable pull_request_stacks_update_merge_conflict_and_reb
 # bin/toggle-feature-flag enable pull_request_stacks_opt_out
 # bin/toggle-feature-flag enable pull_request_stacks_pancake_icon
 # bin/toggle-feature-flag enable pull_request_stacks_rest_api_rebase
+
+# saws
+bin/toggle-feature-flag enable security_center_workflows
+bin/toggle-feature-flag enable security_alerts_workflows_service
